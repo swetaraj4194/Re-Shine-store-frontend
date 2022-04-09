@@ -1,6 +1,7 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
+
 import {
   appLoading,
   appDoneLoading,
@@ -8,9 +9,13 @@ import {
   setMessage,
 } from "../appState/actions";
 
+import myAxios from "../../axios";
+
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const STORY_POST_SUCCESS = "STORY_POST_SUCCESS";
+export const STORY_DELETE_SUCCESS = "STORY_DELETE_SUCCESS";
 
 const loginSuccess = (userWithToken) => {
   return {
@@ -24,6 +29,16 @@ const tokenStillValid = (userWithoutToken) => ({
   payload: userWithoutToken,
 });
 
+export const storyPostSuccess = (story) => ({
+  type: STORY_POST_SUCCESS,
+  payload: story,
+});
+
+export const storyDeleteSuccess = (storyId) => ({
+  type: STORY_DELETE_SUCCESS,
+  payload: storyId,
+});
+
 export const logOut = () => ({ type: LOG_OUT });
 
 export const signUp = (name, email, password) => {
@@ -35,7 +50,6 @@ export const signUp = (name, email, password) => {
         email,
         password,
       });
-
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", true, "account created"));
       dispatch(appDoneLoading());
@@ -48,6 +62,39 @@ export const signUp = (name, email, password) => {
         dispatch(setMessage("danger", true, error.message));
       }
       dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const postStory = (name, content, imageUrl) => {
+  return async (dispatch, getState) => {
+    try {
+      const { space, token } = selectUser(getState());
+      // console.log(name, content, imageUrl);
+      dispatch(appLoading());
+
+      const response = await axios.post(
+        `${apiUrl}/spaces/${space.id}/stories`,
+        {
+          name,
+          content,
+          imageUrl,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // console.log("Yep!", response);
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+      dispatch(storyPostSuccess(response.data.story));
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.log(e.message);
     }
   };
 };
@@ -92,7 +139,8 @@ export const getUserWithStoredToken = () => {
       const response = await axios.get(`${apiUrl}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
+      // Save this information (the user + space) to the store, just like you do in login
+      console.log("res", response);
       // token is still valid
       dispatch(tokenStillValid(response.data));
       dispatch(appDoneLoading());
@@ -106,6 +154,33 @@ export const getUserWithStoredToken = () => {
       // get rid of the token by logging out
       dispatch(logOut());
       dispatch(appDoneLoading());
+    }
+  };
+};
+
+//delete story
+export const deleteStory = (storyId) => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    const { space, token } = selectUser(getState());
+    const spaceId = space.id;
+    // make an axios request to delete
+    // and console.log the response if success
+    try {
+      const response = await myAxios.delete(
+        `${apiUrl}/spaces/${spaceId}/stories/${storyId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("Story deleted?", response.data);
+      dispatch(storyDeleteSuccess(storyId));
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.error(e);
     }
   };
 };

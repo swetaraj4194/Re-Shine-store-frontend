@@ -7,22 +7,14 @@ import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import Spaces from "./pages/Spaces";
+import MySpace from "./pages/MySpace";
+import Details from "./pages/Details";
+import Form from "./pages/Form";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
-import HeroBanner from "./components/HeroBanner";
-
-const Home = () => (
-  <HeroBanner>
-    <h1>Home</h1>
-  </HeroBanner>
-);
-const Other = () => (
-  <HeroBanner>
-    <h1>Other</h1>
-  </HeroBanner>
-);
 
 function App() {
   const dispatch = useDispatch();
@@ -38,10 +30,12 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/other" element={<Other />} />
+        <Route exact path="/" element={<Spaces />} />
+        <Route path="/myspace" element={<MySpace />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/spaces/:id" element={<Details />} />
+        <Route path="myspace/spaces/:id/stories" element={<Form />} />
       </Routes>
     </div>
   );
