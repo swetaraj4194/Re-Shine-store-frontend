@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Button, Container } from "react-bootstrap";
+import { Button, Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, NavLink } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { deleteStory } from "../../store/user/actions";
-
+import EditSpace from "./EditSpace";
 import { selectUser, selectMySpace } from "../../store/user/selectors";
 
 export default function MySpace() {
   const dispatch = useDispatch();
-
+  // const { id } = useSelector(selectUser);
   const user = useSelector(selectUser);
   const space = useSelector(selectMySpace);
+  const [editMode, setEditMode] = useState(false);
+
+  // const displayButtons = user.id === space.userId;
+
+
 
   if (user.token === null) {
     Navigate("/");
@@ -36,12 +41,34 @@ export default function MySpace() {
       <p>Description:{space.description}</p>
       <p> BackgroundColor:{space.backgroundColor}</p>
       <p>color:{space.color}</p>
-      <Button>Edit</Button>
+      {/* <Button>Edit</Button> */}
       <br />
       <br />
+
+      {/* {displayButtons ? (
+        <Card>
+          <Button onClick={() => setEditMode(!editMode)}>
+            {editMode ? "Close" : "Edit my space"}
+          </Button>
+        </Card>
+      ) : null} */}
+
+      <Card>
+        <Button onClick={() => setEditMode(!editMode)}>
+          {editMode ? "Close" : "Edit my space"}
+        </Button>
+      </Card>
+
+      {editMode && (
+        <Card>
+          <EditSpace />
+        </Card>
+      )}
+
       <NavLink to={`spaces/${space.id}/stories`}>
         <Button>Post</Button>{" "}
       </NavLink>
+
       <hr></hr>
       <div key={space.id}>
         {space.stories.map((story) => {

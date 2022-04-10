@@ -5,6 +5,7 @@ const initialState = { allSpaces: [], spaceDetails: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    
     case FETCH_SPACES_SUCCESS:
       return { ...state, allSpaces: [...state.allSpaces, ...action.payload] };
       
