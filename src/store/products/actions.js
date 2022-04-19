@@ -48,7 +48,9 @@ import axios from "axios";
 
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_CATEGORY_SUCCESS = "FETCH_CATEGORY_SUCCESS";
+export const FETCH_DETAILS_SUCCESS = "FETCH_DETAILS_SUCCESS";
 
+//action for all products dispaly
 export const fetchProductsSuccess = (items) => ({
   type: FETCH_PRODUCTS_SUCCESS,
   payload: items,
@@ -69,6 +71,7 @@ export const fetchProducts = () => {
   };
 };
 
+//action for category page
 export const fetchCategorySuccess = (items) => ({
   type: FETCH_CATEGORY_SUCCESS,
   payload: items,
@@ -85,6 +88,25 @@ export const fetchCategory = (id) => {
       //   dispatch(fetchSpacesSuccess(response.data.spaces.rows));
     } catch (e) {
       console.log(e.message);
+    }
+  };
+};
+
+//action for details page
+
+const productDetailsFetched = (item) => ({
+  type: FETCH_DETAILS_SUCCESS,
+  payload: item,
+});
+
+export const fetchProductsById = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await axios.get(`${apiUrl}/products/${id}`);
+      // console.log(response);
+      dispatch(productDetailsFetched(response.data.product));
+    } catch (e) {
+      console.log(e);
     }
   };
 };

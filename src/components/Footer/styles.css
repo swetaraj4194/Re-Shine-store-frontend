@@ -3,10 +3,10 @@
 
 .footer-container {
   width: 100%;
-  background-color:purple;
+  background-color: purple;
   color: black;
   display: flex;
-  /* min-height: 300px; */
+
   justify-content: center;
   padding-top: 95px;
   padding-bottom: 3%;
@@ -17,7 +17,7 @@
 
 .footer-logo {
   margin-right: 334px;
-  color:white;
+  color: white;
   margin-right: 65px;
   font-family: "Crimson Text";
   font-style: normal;

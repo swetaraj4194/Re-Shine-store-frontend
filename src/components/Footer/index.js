@@ -1,3 +1,4 @@
+import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./styles.css";
 
@@ -13,13 +14,34 @@ export default function Footer() {
         <div className="categories">
           <h3 className="footer-title">Categories</h3>
           <ul>
-            <li>Electronics</li>
-            <li>Jewelery</li>
-            <li>Men's Clothing</li>
-            <li>Women's Clothing</li>
-            <li>Furniture</li>
-            <li>Home Decoration</li>
-            <li>Plants</li>
+            <li>
+              
+              <Nav.Link href="/category/1">Electronics</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link href="/category/2">Jewelery</Nav.Link>
+            </li>
+            <li>
+              
+              <Nav.Link href="/category/3">Men's Clothing</Nav.Link>
+            </li>
+            <li>
+              
+              <Nav.Link href="/category/4">Women's Clothing</Nav.Link>
+            </li>
+            <li>
+              
+              <Nav.Link href="/category/5">Furniture</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link href="/category/6">Home Decoration</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link href="/category/7">Plants</Nav.Link>
+            </li>
+            <li>
+              <Nav.Link href="/category/8">Other</Nav.Link>
+            </li>
           </ul>
           {/* ^ should be replaced with links in the future */}
         </div>
@@ -37,16 +59,8 @@ export default function Footer() {
         <div className="contacts-social-link">
           <h3 className="footer-title">Follow us</h3>
           <div className="links-img"></div>
-          {/* <div className="social-links">
-            <div className="social-links-item facebook-footer"></div>
-            <div className="social-links-item instagram-footer"></div>
-            <div className="social-links-item twitter-footer"></div>
-            ^ should be replaced with links in the future
-          </div> */}
         </div>
       </div>
     </div>
   );
 }
-
-// export { Footer };

@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 
 import "./style.css";
 
-import { Container, Card, Row, Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 
 export default function ProductCard(props) {
   // console.log("product",items)
@@ -16,19 +17,18 @@ export default function ProductCard(props) {
   };
 
   return (
-   
-         <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={props.mainImage} />
-          <Card.Body>
-            <Card.Title>{props.title}</Card.Title>
-            <Card.Text>${props.price}</Card.Text>
-            <Card.Text>
-              <ReactStars {...rating}></ReactStars>
-            </Card.Text>
-            <Button variant="primary">Read More</Button>
-          </Card.Body>
-        </Card>
-        
-    
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src={props.mainImage} />
+      <Card.Body>
+        <Card.Title>{props.title}</Card.Title>
+        <Card.Text>${props.price}</Card.Text>
+        <Card.Text>
+          <ReactStars {...rating}></ReactStars>
+        </Card.Text>{" "}
+        <Link to={`/${props.id}`}>
+          <Button variant="primary">Read More</Button>
+        </Link>
+      </Card.Body>
+    </Card>
   );
 }

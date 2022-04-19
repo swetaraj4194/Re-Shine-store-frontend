@@ -6,12 +6,12 @@ import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 
-import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Products from "./pages/Products";
 import Category from "./pages/Category";
+import Details from "./pages/Details";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -28,13 +28,14 @@ function App() {
   return (
     <div className="App">
       <Navigation />
-      <Hero />
+
       <MessageBox />
 
       {isLoading ? <Loading /> : null}
       <Routes>
         <Route exact path="/" element={<Products />} />
-        <Route  path="category/:id" element={<Category />} />
+        <Route path="category/:id" element={<Category />} />
+        <Route path="/:id" element={<Details />} />
 
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />

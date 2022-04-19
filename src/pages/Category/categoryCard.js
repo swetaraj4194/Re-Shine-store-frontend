@@ -4,6 +4,7 @@ import "./style.css";
 
 import { Card, Button } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 
 export default function CategoryCard(props) {
   // console.log("product",items)
@@ -24,7 +25,9 @@ export default function CategoryCard(props) {
         <Card.Text>
           <ReactStars {...rating}></ReactStars>
         </Card.Text>
-        <Button variant="primary">Read More</Button>
+        <Link to={`/${props.id}`}>
+          <Button variant="primary">Read More</Button>
+        </Link>
       </Card.Body>
     </Card>
   );

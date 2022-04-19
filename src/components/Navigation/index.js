@@ -38,7 +38,9 @@ export default function Navigation() {
                 margin: "10px 5px",
               }}
             />
-            Re-Shine Store
+            <a className="logo" href="/">
+              Re-Shine Store
+            </a>
           </Nav.Link>
         </Navbar.Brand>
 
@@ -52,8 +54,6 @@ export default function Navigation() {
             <Nav.Link href="/">Home</Nav.Link>
 
             <NavDropdown title="Products" id="navbarScrollingDropdown">
-              {/* <NavDropdown.Item href={`/category/${category.categoryId}`}>Electronics</NavDropdown.Item> */}
-
               <NavDropdown.Item href="/">All</NavDropdown.Item>
 
               <NavDropdown.Item href="/category/1">
@@ -83,6 +83,8 @@ export default function Navigation() {
             <Nav.Link href="/about">About us</Nav.Link>
             <Nav.Link href="/help">Help</Nav.Link>
           </Nav>
+
+          <Nav.Link>sell your products</Nav.Link>
 
           <Form className="d-flex">
             <FormControl
