@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200;400&display=swap");
+
+.footer-container {
+  width: 100%;
+  background-color:purple;
+  color: black;
+  display: flex;
+  /* min-height: 300px; */
+  justify-content: center;
+  padding-top: 95px;
+  padding-bottom: 3%;
+  text-align: left;
+  /* position: absolute; */
+  /* bottom: 0; */
+}
+
+.footer-logo {
+  margin-right: 334px;
+  color:white;
+  margin-right: 65px;
+  font-family: "Crimson Text";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 47px;
+  text-decoration: none;
+}
+
+.footer-right-logo {
+  color: white;
+}
+
+.footer-title {
+  color: black;
+  font-family: "Crimson Text";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+  margin-bottom: 22px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 0 0 20px 0;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.categories,
+.account {
+  margin-right: 90px;
+}
+
+.social-links,
+.links-img {
+  display: flex;
+  flex-direction: row;
+  min-height: 24.33px;
+  width: 100.31px;
+  /* background-color: aqua; */
+  background-image: url("./icon/Group\ 245.svg");
+  background-repeat: no-repeat;
+}
+
+/* .social-links-item {
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  margin-right: 13.8px;
+}
+.social-links-item:last-child {
+  margin-right: 0;
+}
+
+.facebook-footer {
+  background-image: url("./icon/Facebook.svg");
+}
+
+.instagram-footer {
+  background-image: url("./icon/Instagram.svg");
+}
+
+.twitter-footer {
+  background-image: url("./icon/Twitter.svg");
+} */

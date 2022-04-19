@@ -2,26 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
 // import { NavLink } from "react-router-dom";
-import { fetchProducts } from "../../store/products/actions";
-import { selectProducts } from "../../store/products/selectors";
+import Loading from "../../components/Loading";
+import { fetchCategory } from "../../store/products/actions";
+import { selectCategories } from "../../store/products/selectors";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
-import ProductCard from "./ProductCard";
+// import ProductCard from "../Products/ProductCard";
+import { useParams } from "react-router-dom";
+import CategoryCard from "./categoryCard";
 
-export default function Products() {
+export default function Category() {
+  const { id } = useParams();
+
   const dispatch = useDispatch();
-  const items = useSelector(selectProducts);
-  // console.log("products",items)
+  const items = useSelector(selectCategories);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchCategory(id));
   }, [dispatch]);
 
-  //filter
-
+  // console.log("product", items);
   const [price, setPrices] = useState(0);
 
-  // console.log(price);
-  //pagination
   const [offset, setoffset] = useState(0);
 
   const getNextProducts = () => {
@@ -32,18 +33,18 @@ export default function Products() {
     setoffset(offset - 6);
   };
 
-  //rating for side bar
+  if (!items || parseInt(items.id) !== parseInt(id)) return <Loading />;
 
   const filteredPrice =
     price === 0
-      ? [...items]
-      : [...items].filter((product) => {
+      ? [...items.products]
+      : [...items.products].filter((product) => {
           return product.price <= price && product.price >= price - 200;
         });
 
   return (
     <Container>
-      <h1>Products</h1>
+      <h1>{items.category}</h1>
 
       <Row>
         <Col sm={3}>
@@ -121,8 +122,6 @@ export default function Products() {
               </Button>
             </div>
           </Card>
-
-          <Card> Filter By Rate</Card>
         </Col>
 
         <Col sm={9}>
@@ -131,7 +130,7 @@ export default function Products() {
               return (
                 offset <= index &&
                 index <= offset + 5 && (
-                  <ProductCard
+                  <CategoryCard
                     id={item.id}
                     mainImage={item.mainImage}
                     title={item.title}

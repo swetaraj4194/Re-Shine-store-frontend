@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 import { BsFillCartFill } from "react-icons/bs";
 import { BsFillBrightnessAltHighFill } from "react-icons/bs";
+// import{selectProducts} from "../../store/products/selectors"
 
 import {
   Button,
@@ -25,12 +26,17 @@ export default function Navigation() {
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <Navbar bg="warning" expand="lg">
+    <Navbar expand="lg" className="navbar">
       <Container className="d-flex">
         <Navbar.Brand href="/">
           <Nav.Link className="title">
             <BsFillBrightnessAltHighFill
-              style={{ fontSize: "36px", color: "white", textAlign: "center", margin: "10px 5px" }}
+              style={{
+                fontSize: "36px",
+                color: "yellow",
+                textAlign: "center",
+                margin: "10px 5px",
+              }}
             />
             Re-Shine Store
           </Nav.Link>
@@ -39,32 +45,39 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
-            className="me-auto my-2 my-lg-0 menu"
+            className="me-auto my-2 my-lg-0 "
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
             <Nav.Link href="/">Home</Nav.Link>
 
             <NavDropdown title="Products" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action2">Electronics</NavDropdown.Item>
-              <NavDropdown.Item href="#action3">Jewelery</NavDropdown.Item>
+              {/* <NavDropdown.Item href={`/category/${category.categoryId}`}>Electronics</NavDropdown.Item> */}
 
-              <NavDropdown.Item href="#action4">
+              <NavDropdown.Item href="/">All</NavDropdown.Item>
+
+              <NavDropdown.Item href="/category/1">
+                Electronics
+              </NavDropdown.Item>
+
+              <NavDropdown.Item href="/category/2">Jewelery</NavDropdown.Item>
+
+              <NavDropdown.Item href="/category/3">
                 Men's Clothing
               </NavDropdown.Item>
 
-              <NavDropdown.Item href="#action5">
+              <NavDropdown.Item href="/category/4">
                 Women's Clothing
               </NavDropdown.Item>
 
-              <NavDropdown.Item href="#action6">Furniture</NavDropdown.Item>
-              <NavDropdown.Item href="#action7">
+              <NavDropdown.Item href="/category/5">Furniture</NavDropdown.Item>
+              <NavDropdown.Item href="/category/6">
                 Home Decoration
               </NavDropdown.Item>
 
-              <NavDropdown.Item href="#action7">Plants</NavDropdown.Item>
+              <NavDropdown.Item href="/category/7">Plants</NavDropdown.Item>
 
-              <NavDropdown.Item href="#action8">Other</NavDropdown.Item>
+              <NavDropdown.Item href="/category/8">Other</NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link href="/about">About us</Nav.Link>
@@ -92,78 +105,3 @@ export default function Navigation() {
     </Navbar>
   );
 }
-
-// import React from "react";
-// import Navbar from "react-bootstrap/Navbar";
-// import Nav from "react-bootstrap/Nav";
-// import { NavLink } from "react-router-dom";
-// import { useSelector } from "react-redux";
-// import { selectToken } from "../../store/user/selectors";
-
-// import LoggedIn from "./LoggedIn";
-// import LoggedOut from "./LoggedOut";
-// import {
-//   Button,
-//   Container,
-//   Form,
-//   FormControl,
-//   NavDropdown,
-// } from "react-bootstrap";
-
-// export default function Navigation() {
-//   const token = useSelector(selectToken);
-
-//   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
-
-//   return (
-//     <Navbar bg="light" expand="lg">
-//       <Container>
-//         <Navbar.Brand href="#">Re-Shine Store</Navbar.Brand>
-//         <Navbar.Toggle aria-controls="navbarScroll" />
-//         <Navbar.Collapse id="navbarScroll">
-//           <Nav
-//             className="me-auto my-2 my-lg-0"
-//             style={{ maxHeight: "100px" }}
-//             navbarScroll
-//           >
-//             <Nav.Link href="#action1">Home</Nav.Link>
-//             {/* <Nav.Link href="#action2">Products</Nav.Link> */}
-//             <NavDropdown title="Products" id="navbarScrollingDropdown">
-//               <NavDropdown.Item href="#action2">Electronics</NavDropdown.Item>
-//               <NavDropdown.Item href="#action3">Jewelery</NavDropdown.Item>
-
-//               <NavDropdown.Item href="#action4">
-//                 Men's Clothing
-//               </NavDropdown.Item>
-
-//               <NavDropdown.Item href="#action5">
-//                 Women's Clothing
-//               </NavDropdown.Item>
-
-//               <NavDropdown.Item href="#action6">Furniture</NavDropdown.Item>
-//               <NavDropdown.Item href="#action7">
-//                 Home Decoration
-//               </NavDropdown.Item>
-
-//               <NavDropdown.Item href="#action7">Plants</NavDropdown.Item>
-//             </NavDropdown>
-//           </Nav>
-
-//           <Form className="d-flex">
-//             <FormControl
-//               type="search"
-//               placeholder="Search"
-//               className="me-2"
-//               aria-label="Search"
-//             />
-
-//             <Button variant="outline-success">Search</Button>
-//           </Form>
-//           {loginLogoutControls}
-
-//           {/* <Nav>{loginLogoutControls}</Nav> */}
-//         </Navbar.Collapse>
-//       </Container>
-//     </Navbar>
-//   );
-// }

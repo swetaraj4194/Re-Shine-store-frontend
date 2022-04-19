@@ -30,13 +30,18 @@
 // }
 
 import { FETCH_PRODUCTS_SUCCESS } from "./actions";
+import { FETCH_CATEGORY_SUCCESS } from "./actions";
 
-const initialState = { allProducts: [] };
+const initialState = { categoryDetails:[] ,allProducts: [] };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+
     case FETCH_PRODUCTS_SUCCESS:
-      return { ...state, allProducts:action.payload};
+      return { ...state, allProducts: action.payload };
+
+    case FETCH_CATEGORY_SUCCESS:
+     return { ...state, categoryDetails: { ...action.payload } };
 
     default:
       return state;

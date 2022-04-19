@@ -1,0 +1,23 @@
+.image {
+  height: 250px;
+  width: 350px;
+  background-size: cover ;
+  justify-content: left;
+  
+}
+.navbar{
+    background-color: purple;
+}
+
+.item {
+  display: flex;
+  flex-direction: row !important;
+   
+}
+
+.buttons {
+  justify-content: space-around;
+  
+}
+
+
