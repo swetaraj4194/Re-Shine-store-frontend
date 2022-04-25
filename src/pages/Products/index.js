@@ -22,6 +22,7 @@ import Hero from "../../components/Hero";
 export default function Products() {
   const dispatch = useDispatch();
   const items = useSelector(selectProducts);
+  console.log("item",items)
 
   useEffect(() => {
     dispatch(fetchProducts());

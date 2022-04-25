@@ -22,6 +22,7 @@ export default function Category() {
 
   const [price, setPrices] = useState(0);
   const [offset, setoffset] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const getNextProducts = () => {
     setoffset(offset + 6);
@@ -33,101 +34,60 @@ export default function Category() {
 
   if (!items || parseInt(items.id) !== parseInt(id)) return <Loading />;
 
+  //search
+
   const filteredPrice =
     price === 0
       ? [...items.products]
       : [...items.products].filter((product) => {
-          return product.price <= price && product.price >= price - 200;
+          return product.price <= price && product.price >= 0;
         });
+
+  const filteredProduct = [...filteredPrice].filter((product) => {
+    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div>
       <Hero />
 
       <Container>
+        <div>
+          <span className="search">Search:</span>
+          <input
+            type="search"
+            placeholder=""
+            className="me-1"
+            aria-label="Search"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
+
         <h1>{items.category}</h1>
 
         <Row>
           <Col sm={3}>
-            <Card>
-              <Card.Title>Filter By Price</Card.Title>
-              <div>
-                <Button
-                  value={200}
-                  onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
-                  }}
-                >
-                  {" "}
-                  0-$200
-                </Button>
-                <hr />
-                <Button
-                  value={400}
-                  onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
-                  }}
-                >
-                  {" "}
-                  $200-$400
-                </Button>
-                <hr />
-                <Button
-                  value={600}
-                  onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
-                  }}
-                >
-                  {" "}
-                  $400-$600
-                </Button>
-                <hr />
-                <Button
-                  value={800}
-                  onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
-                  }}
-                >
-                  {" "}
-                  $600-$800
-                </Button>
-                <hr />
-                <Button
-                  value={1000}
-                  onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
-                  }}
-                >
-                  {" "}
-                  $800+
-                </Button>
-              </div>
-            </Card>
+            <label for="customRange3" class="form-label">
+              Price range
+            </label>
+            <div className="slider-parent">
+              <input
+                type="range"
+                min="1"
+                max="1500"
+                value={price}
+                onChange={({ target: { value: radius } }) => {
+                  setPrices(radius);
+                }}
+              />
+              <div className="buble">${price}</div>
+            </div>
           </Col>
 
           <Col sm={9}>
             <Row xs={1} md={2} className="g-4" style={{ columnGap: "30px" }}>
-              {filteredPrice.map((item, index) => {
+              {filteredProduct.map((item, index) => {
                 return (
                   offset <= index &&
                   index <= offset + 5 && (
@@ -157,7 +117,7 @@ export default function Category() {
           <Button
             className="btn"
             onClick={getNextProducts}
-            disabled={offset >= filteredPrice.length - 5}
+            disabled={offset >= filteredProduct.length - 5}
           >
             Next
           </Button>
