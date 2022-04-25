@@ -64,6 +64,7 @@ export default function SellerForm() {
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "xevkbl7f");
+    // console.log("main",files)
 
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/daokf4bsg/image/upload",
@@ -80,25 +81,20 @@ export default function SellerForm() {
   const uploadImage = async (e) => {
     const files = e.target.files;
     const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "xevkbl7f");
+    // console.log("main",files)
 
-    const uploaders = files.map((file) => {
-      data.append("file", files[0]);
-      data.append("upload_preset", "xevkbl7f");
-
-      console.log("files", files);
-
-      const res = fetch(
-        "https://api.cloudinary.com/v1_1/daokf4bsg/image/upload",
-        {
-          method: "POST",
-          body: data,
-        }
-      );
-
-      const file = res.json();
-      console.log(file);
-      setImage([...images, file.url]);
-    });
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/daokf4bsg/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    console.log(file);
+    setImage(file.url);
   };
 
   return (
