@@ -10,3 +10,10 @@
   text-decoration: none;
   color: white;
 }
+.sale {
+  text-decoration: none;
+  color: white !important;
+}
+.nav-link{
+  color: white !important;
+}

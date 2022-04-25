@@ -7,8 +7,6 @@ import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 
 export default function ProductCard(props) {
-  // console.log("product",items)
-
   const rating = {
     size: 20,
     value: props.rating,
@@ -17,7 +15,7 @@ export default function ProductCard(props) {
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: "18rem" }} key={props.id}>
       <Card.Img variant="top" src={props.mainImage} />
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
@@ -26,7 +24,7 @@ export default function ProductCard(props) {
           <ReactStars {...rating}></ReactStars>
         </Card.Text>{" "}
         <Link to={`/${props.id}`}>
-          <Button variant="primary">Read More</Button>
+          <Button variant="primary">Details</Button>
         </Link>
       </Card.Body>
     </Card>

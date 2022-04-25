@@ -1,4 +1,3 @@
-import { Card } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 
 export default function RatingCard(props) {

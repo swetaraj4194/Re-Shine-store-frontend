@@ -1,27 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import "./style.css";
-// import { NavLink } from "react-router-dom";
+
 import { fetchProducts } from "../../store/products/actions";
 import { selectProducts } from "../../store/products/selectors";
-import { Container, Card, Row, Col, Button } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormControl,
+} from "react-bootstrap";
+import { BsSearch } from "react-icons/bs";
+
 import ProductCard from "./ProductCard";
 import Hero from "../../components/Hero";
 
 export default function Products() {
   const dispatch = useDispatch();
   const items = useSelector(selectProducts);
-  // console.log("products",items)
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  //filter
+  const [searchTerm, setSearchTerm] = useState("");
 
+  //filter
+  const [filteredPrice, setFilteredPrice] = useState([...items]);
   const [price, setPrices] = useState(0);
 
-  // console.log(price);
+  const checkAndSetPrices = (value) => {
+    if (price === value) {
+      setPrices(0);
+      return;
+    }
+    setPrices(value);
+  };
+
+  //search
+
+  const filterProduct = [...filteredPrice].filter((product) => {
+    return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   //pagination
   const [offset, setoffset] = useState(0);
 
@@ -35,17 +60,32 @@ export default function Products() {
 
   //rating for side bar
 
-  const filteredPrice =
-    price === 0
-      ? [...items]
-      : [...items].filter((product) => {
-          return product.price <= price && product.price >= price - 200;
-        });
+  useEffect(() => {
+    setFilteredPrice(
+      price === 0
+        ? [...items]
+        : [...items].filter((product) => {
+            return product.price <= price && product.price >= price - 200;
+          })
+    );
+  }, [items, price]);
 
   return (
     <div>
       <Hero />
       <Container>
+        <div>
+          <span className="search">Search:</span>
+          <input
+            type="search"
+            placeholder=""
+            className="me-1"
+            aria-label="Search"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
+
         <h1>Products</h1>
 
         <Row>
@@ -56,11 +96,7 @@ export default function Products() {
                 <Button
                   value={200}
                   onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
+                    checkAndSetPrices(e.target.value);
                   }}
                 >
                   {" "}
@@ -70,11 +106,7 @@ export default function Products() {
                 <Button
                   value={400}
                   onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
+                    checkAndSetPrices(e.target.value);
                   }}
                 >
                   {" "}
@@ -84,11 +116,7 @@ export default function Products() {
                 <Button
                   value={600}
                   onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
+                    checkAndSetPrices(e.target.value);
                   }}
                 >
                   {" "}
@@ -98,11 +126,7 @@ export default function Products() {
                 <Button
                   value={800}
                   onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
+                    checkAndSetPrices(e.target.value);
                   }}
                 >
                   {" "}
@@ -112,11 +136,7 @@ export default function Products() {
                 <Button
                   value={1000}
                   onClick={(e) => {
-                    if (!e.target.value) {
-                      setPrices(0);
-                    } else {
-                      setPrices(e.target.value);
-                    }
+                    checkAndSetPrices(e.target.value);
                   }}
                 >
                   {" "}
@@ -124,17 +144,16 @@ export default function Products() {
                 </Button>
               </div>
             </Card>
-
-            <Card> Filter By Rate</Card>
           </Col>
 
           <Col sm={9}>
             <Row xs={1} md={2} className="g-4" style={{ columnGap: "30px" }}>
-              {filteredPrice.map((item, index) => {
+              {filterProduct.map((item, index) => {
                 return (
                   offset <= index &&
                   index <= offset + 5 && (
                     <ProductCard
+                      key={item.id}
                       id={item.id}
                       mainImage={item.mainImage}
                       title={item.title}
@@ -160,7 +179,7 @@ export default function Products() {
           <Button
             className="btn"
             onClick={getNextProducts}
-            disabled={offset >= filteredPrice.length - 5}
+            disabled={offset >= filterProduct.length - 5}
           >
             Next
           </Button>

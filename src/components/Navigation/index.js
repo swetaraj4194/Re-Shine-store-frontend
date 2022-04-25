@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 
@@ -8,7 +8,6 @@ import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 import { BsFillCartFill } from "react-icons/bs";
 import { BsFillBrightnessAltHighFill } from "react-icons/bs";
-// import{selectProducts} from "../../store/products/selectors"
 
 import {
   Button,
@@ -19,6 +18,7 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import NavbarItem from "./NavbarItem";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
@@ -27,7 +27,7 @@ export default function Navigation() {
 
   return (
     <Navbar expand="lg" className="navbar">
-      <Container className="d-flex">
+      <Container fluid className="d-flex">
         <Navbar.Brand href="/">
           <Nav.Link className="title">
             <BsFillBrightnessAltHighFill
@@ -38,9 +38,9 @@ export default function Navigation() {
                 margin: "10px 5px",
               }}
             />
-            <a className="logo" href="/">
+            <Link className="logo" to="/">
               Re-Shine Store
-            </a>
+            </Link>
           </Nav.Link>
         </Navbar.Brand>
 
@@ -84,23 +84,9 @@ export default function Navigation() {
             <Nav.Link href="/help">Help</Nav.Link>
           </Nav>
 
-          <Nav.Link>sell your products</Nav.Link>
+          <Nav.Link href="/newItem">sell Items</Nav.Link>
 
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-1"
-              aria-label="Search"
-            />
-
-            <Button variant="outline-success">Search</Button>
-          </Form>
-
-          <Nav.Link style={{ fontSize: "30px", color: "rgb(0, 123, 255)" }}>
-            <BsFillCartFill />
-          </Nav.Link>
-
+          {token && <NavbarItem path="/myProducts" linkText="My Items" />}
           {loginLogoutControls}
         </Navbar.Collapse>
       </Container>

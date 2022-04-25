@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import "./style.css";
-// import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 import Loading from "../../components/Loading";
 import { fetchCategory } from "../../store/products/actions";
 import { selectCategories } from "../../store/products/selectors";
-import { Container, Card, Row, Col, Button } from "react-bootstrap";
-// import ProductCard from "../Products/ProductCard";
-import { useParams } from "react-router-dom";
 import CategoryCard from "./categoryCard";
 import Hero from "../../components/Hero";
 
@@ -21,9 +20,7 @@ export default function Category() {
     dispatch(fetchCategory(id));
   }, [dispatch]);
 
-  // console.log("product", items);
   const [price, setPrices] = useState(0);
-
   const [offset, setoffset] = useState(0);
 
   const getNextProducts = () => {

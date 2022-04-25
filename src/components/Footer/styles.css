@@ -8,7 +8,7 @@
   display: flex;
 
   justify-content: center;
-  padding-top: 95px;
+  padding-top: 60px;
   padding-bottom: 3%;
   text-align: left;
   /* position: absolute; */
@@ -29,6 +29,7 @@
 
 .footer-right-logo {
   color: white;
+  
 }
 
 .footer-title {
@@ -48,6 +49,7 @@ ul {
 
 li {
   margin: 0 0 20px 0;
+  height: 5px;
 }
 
 .footer-right {

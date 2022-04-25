@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-
 import "./style.css";
 
 import { Card, Button } from "react-bootstrap";
@@ -7,8 +5,6 @@ import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 
 export default function CategoryCard(props) {
-  // console.log("product",items)
-
   const rating = {
     size: 20,
     value: props.rating,

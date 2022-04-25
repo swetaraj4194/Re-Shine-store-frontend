@@ -13,10 +13,10 @@ import myAxios from "../../axios";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
-export const SPACE_UPDATED = "SPACE_UPDATED";
+export const USER_UPDATED = "USER_UPDATED";
 export const LOG_OUT = "LOG_OUT";
-export const STORY_POST_SUCCESS = "STORY_POST_SUCCESS";
-export const STORY_DELETE_SUCCESS = "STORY_DELETE_SUCCESS";
+export const PRODUCT_POST_SUCCESS = "PRODUCT_POST_SUCCESS";
+export const PRODUCT_DELETE_SUCCESS = "PRODUCT_DELETE_SUCCESS";
 
 const loginSuccess = (userWithToken) => {
   return {
@@ -30,25 +30,10 @@ const tokenStillValid = (userWithoutToken) => ({
   payload: userWithoutToken,
 });
 
-// export const storyPostSuccess = (story) => ({
-//   type: STORY_POST_SUCCESS,
-//   payload: story,
-// });
-
-// export const storyDeleteSuccess = (storyId) => ({
-//   type: STORY_DELETE_SUCCESS,
-//   payload: storyId,
-// });
-
-
-// export const spaceUpdated = (space) => ({
-//   type: SPACE_UPDATED,
-//   payload: space,
-// });
-
 export const logOut = () => ({ type: LOG_OUT });
 
-export const signUp = (name, email, password) => {
+//action for user signup:
+export const signUp = (name, email, password, phone) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
@@ -56,6 +41,7 @@ export const signUp = (name, email, password) => {
         name,
         email,
         password,
+        phone,
       });
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", true, "account created"));
@@ -73,39 +59,7 @@ export const signUp = (name, email, password) => {
   };
 };
 
-// export const postStory = (name, content, imageUrl) => {
-//   return async (dispatch, getState) => {
-//     try {
-//       const { space, token } = selectUser(getState());
-//       // console.log(name, content, imageUrl);
-//       dispatch(appLoading());
-
-//       const response = await axios.post(
-//         `${apiUrl}/spaces/${space.id}/stories`,
-//         {
-//           name,
-//           content,
-//           imageUrl,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-
-//       // console.log("Yep!", response);
-//       dispatch(
-//         showMessageWithTimeout("success", false, response.data.message, 3000)
-//       );
-//       dispatch(storyPostSuccess(response.data.story));
-//       dispatch(appDoneLoading());
-//     } catch (e) {
-//       console.log(e.message);
-//     }
-//   };
-// };
-
+// action for user login:
 export const login = (email, password) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
@@ -131,6 +85,7 @@ export const login = (email, password) => {
   };
 };
 
+// action to get user with stored token:
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
     // get token from the state
@@ -147,7 +102,7 @@ export const getUserWithStoredToken = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       // Save this information (the user + space) to the store, just like you do in login
-      console.log("res", response);
+      // console.log("res", response);
       // token is still valid
       dispatch(tokenStillValid(response.data));
       dispatch(appDoneLoading());
@@ -165,67 +120,220 @@ export const getUserWithStoredToken = () => {
   };
 };
 
-//updating space 
+//action for adding product
 
-// export const updateMySpace = (title, description, backgroundColor, color) => {
-//   return async (dispatch, getState) => {
-//     try {
-//       const { space, token } = selectUser(getState());
-//       dispatch(appLoading());
+export const productPostSuccess = (item) => ({
+  type: PRODUCT_POST_SUCCESS,
+  payload: item,
+});
 
-//       const response = await axios.patch(
-//         `${apiUrl}/spaces/${space.id}`,
-//         {
-//           title,
-//           description,
-//           backgroundColor,
-//           color,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       console.log("update",response.data);
+export const postProduct = (
+  title,
+  description,
+  price,
+  mainImage,
+  categoryId,
+  amount,
+  images
+) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token } = selectUser(getState());
+      console.log("token", token);
 
-//       dispatch(
-//         showMessageWithTimeout("success", false, "update successfull", 3000)
-//       );
-//       dispatch(spaceUpdated(response.data.space));
-//       dispatch(appDoneLoading());
-//     } catch (e) {
-//       console.log(e.message);
-//     }
-//   };
-// };
+      dispatch(appLoading());
 
+      const response = await axios.post(
+        `${apiUrl}/products/new`,
+        {
+          title,
+          categoryId,
+          amount,
+          mainImage,
+          images,
 
+          description,
+          price,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-//delete story
-// export const deleteStory = (storyId) => {
-//   return async (dispatch, getState) => {
-//     dispatch(appLoading());
-//     const { space, token } = selectUser(getState());
-//     const spaceId = space.id;
-//     // make an axios request to delete
-//     // and console.log the response if success
-//     try {
-//       const response = await myAxios.delete(
-//         `${apiUrl}/spaces/${spaceId}/stories/${storyId}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
+      console.log("Yep!", response.data);
+      dispatch(showMessageWithTimeout("sucess", true, "product added", 1500));
 
-//       console.log("Story deleted?", response.data);
+      dispatch(productPostSuccess(response.data.product));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
 
-//       dispatch(storyDeleteSuccess(storyId));
-//       dispatch(appDoneLoading());
-//     } catch (e) {
-//       console.error(e);
-//     }
-//   };
-// };
+///product delete
+
+export const productDeleteSuccess = (id) => ({
+  type: PRODUCT_DELETE_SUCCESS,
+  payload: id,
+});
+
+export const deleteProduct = (id) => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    const { token } = selectUser(getState());
+
+    console.log(id);
+
+    try {
+      const response = await axios.delete(`${apiUrl}/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Product deleted?", response);
+
+      dispatch(productDeleteSuccess(id));
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.error(e);
+    }
+  };
+};
+
+//action for editing user personal details
+export const userUpdate = (user) => ({
+  type: USER_UPDATED,
+  payload: user,
+});
+
+export const updateUser = (name, email, phone, id) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token } = selectUser(getState());
+      dispatch(appLoading());
+      console.log(name, email, phone, id);
+
+      const response = await axios.patch(
+        `${apiUrl}/products/${id}`,
+        {
+          name,
+          email,
+          phone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // console.log("update", response.data);
+
+      dispatch(
+        showMessageWithTimeout("success", false, "update successfull", 3000)
+      );
+      dispatch(userUpdate(response.data));
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
+//posting bid amount using (product post success action)
+export const postBidAmount = (id, amount) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token } = selectUser(getState());
+
+      // console.log("token",token)
+
+      dispatch(appLoading());
+
+      const response = await axios.post(
+        `${apiUrl}/products/bids/${id}`,
+        {
+          amount,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // console.log("Bid", response);
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+
+      dispatch(productPostSuccess(response.data.newBid));
+
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+//action for posting comments
+
+export const postComments = (id, review) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token } = selectUser(getState());
+
+      // console.log("token",token)
+
+      dispatch(appLoading());
+
+      const response = await axios.post(
+        `${apiUrl}/products/comment/${id}`,
+        {
+          review,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // console.log("Bid", response);
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+
+      dispatch(productPostSuccess(response.data.newComment));
+
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};

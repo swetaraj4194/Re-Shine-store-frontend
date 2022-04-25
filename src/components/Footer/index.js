@@ -1,5 +1,5 @@
 import { Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./styles.css";
 
 export default function Footer() {
@@ -14,23 +14,19 @@ export default function Footer() {
         <div className="categories">
           <h3 className="footer-title">Categories</h3>
           <ul>
-            <li>
-              
+            <li className="cat">
               <Nav.Link href="/category/1">Electronics</Nav.Link>
             </li>
             <li>
               <Nav.Link href="/category/2">Jewelery</Nav.Link>
             </li>
             <li>
-              
               <Nav.Link href="/category/3">Men's Clothing</Nav.Link>
             </li>
             <li>
-              
               <Nav.Link href="/category/4">Women's Clothing</Nav.Link>
             </li>
             <li>
-              
               <Nav.Link href="/category/5">Furniture</Nav.Link>
             </li>
             <li>
