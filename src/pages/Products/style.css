@@ -1,23 +1,36 @@
 .image {
   height: 250px;
   width: 350px;
-  background-size: cover ;
+  background-size: cover;
   justify-content: left;
-  
 }
-.navbar{
-    background-color: purple;
+.navbar {
+  background-color: purple;
 }
-
+.web-color {
+  background-color: purple !important;
+  border: purple !important;
+  /* color: white; */
+}
 .item {
   display: flex;
   flex-direction: row !important;
-   
 }
 
 .buttons {
   justify-content: space-around;
-  
 }
-
-
+.icon {
+  padding: 5px;
+  max-width: 300px;
+  background: url("https://static.thenounproject.com/png/101791-200.png")
+    no-repeat right;
+  background-size: 28px;
+  width: fit-content;
+  /* max-width: 400px; */
+  width: 60%;
+  margin: auto;
+  justify-content: center;
+  border-radius: 6px !important;
+  border-color: rgb(134, 6, 134) !important;
+}

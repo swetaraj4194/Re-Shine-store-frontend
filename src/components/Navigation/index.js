@@ -6,14 +6,13 @@ import { selectToken } from "../../store/user/selectors";
 
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
-import { BsFillCartFill } from "react-icons/bs";
 import { BsFillBrightnessAltHighFill } from "react-icons/bs";
 
 import {
+
   Button,
   Container,
-  Form,
-  FormControl,
+
   Nav,
   Navbar,
   NavDropdown,
@@ -84,7 +83,9 @@ export default function Navigation() {
             <Nav.Link href="/help">Help</Nav.Link>
           </Nav>
 
-          <Nav.Link href="/newItem">sell Items</Nav.Link>
+          <Nav.Link href="/newItem">
+            <Button className="btn btn-light">SELL</Button>
+          </Nav.Link>
 
           {token && <NavbarItem path="/myProducts" linkText="My Items" />}
           {loginLogoutControls}

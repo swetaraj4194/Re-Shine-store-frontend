@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { BsSearch } from "react-icons/bs";
 
 import "./style.css";
 
 import { fetchProducts } from "../../store/products/actions";
 import { selectProducts } from "../../store/products/selectors";
+
 import {
   Container,
   Card,
@@ -13,16 +15,15 @@ import {
   Button,
   Form,
   FormControl,
+  Carousel,
 } from "react-bootstrap";
-import { BsSearch } from "react-icons/bs";
 
 import ProductCard from "./ProductCard";
-import Hero from "../../components/Hero";
+import { Link } from "react-router-dom";
 
 export default function Products() {
   const dispatch = useDispatch();
   const items = useSelector(selectProducts);
-
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -73,82 +74,114 @@ export default function Products() {
 
   return (
     <div>
-      <Hero />
+      <Carousel>
+        <Carousel.Item>
+          <img
+            className="w-100"
+            src="https://cdn.pixabay.com/photo/2016/05/27/08/51/mobile-phone-1419275__340.jpg"
+            alt="details.title"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="w-100"
+            src="https://cdn.pixabay.com/photo/2015/12/06/09/15/maple-1079235__340.jpg"
+            alt="details.title"
+          />
+        </Carousel.Item>
+
+        <Carousel.Item>
+          <img
+            className="w-100"
+            src="https://cdn.pixabay.com/photo/2016/09/22/10/44/banner-1686943__340.jpg"
+            alt="details.title"
+          />
+        </Carousel.Item>
+      </Carousel>
+
       <Container>
-        <div>
-          <span className="search">Search:</span>
+        <div className=" w-100 m-5" style={{ textAlign: "center" }}>
           <input
             type="search"
-            placeholder=""
-            className="me-1"
+            className="icon"
+            placeholder="Search"
             aria-label="Search"
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
           />
         </div>
 
-        <h1>Products</h1>
-
         <Row>
           <Col sm={3}>
-            <Card>
-              <Card.Title>Filter By Price</Card.Title>
+            <div>
+              <Card.Title className="text-muted mb-3">
+                Filter By Price
+              </Card.Title>
               <div>
-                <Button
-                  value={200}
-                  onClick={(e) => {
-                    checkAndSetPrices(e.target.value);
-                  }}
-                >
-                  {" "}
-                  0-$200
-                </Button>
-                <hr />
-                <Button
-                  value={400}
-                  onClick={(e) => {
-                    checkAndSetPrices(e.target.value);
-                  }}
-                >
-                  {" "}
-                  $200-$400
-                </Button>
-                <hr />
-                <Button
-                  value={600}
-                  onClick={(e) => {
-                    checkAndSetPrices(e.target.value);
-                  }}
-                >
-                  {" "}
-                  $400-$600
-                </Button>
-                <hr />
-                <Button
-                  value={800}
-                  onClick={(e) => {
-                    checkAndSetPrices(e.target.value);
-                  }}
-                >
-                  {" "}
-                  $600-$800
-                </Button>
-                <hr />
-                <Button
-                  value={1000}
-                  onClick={(e) => {
-                    checkAndSetPrices(e.target.value);
-                  }}
-                >
-                  {" "}
-                  $800+
-                </Button>
+                <div className="mb-3">
+                  <Button
+                    className="web-color"
+                    value={200}
+                    onClick={(e) => {
+                      checkAndSetPrices(e.target.value);
+                    }}
+                  >
+                    0 - €200
+                  </Button>
+                </div>
+
+                <div className="mb-3">
+                  <Button
+                    className="web-color"
+                    value={400}
+                    onClick={(e) => {
+                      checkAndSetPrices(e.target.value);
+                    }}
+                  >
+                    €200 - €400
+                  </Button>
+                </div>
+
+                <div className="mb-3">
+                  <Button
+                    className="web-color"
+                    value={600}
+                    onClick={(e) => {
+                      checkAndSetPrices(e.target.value);
+                    }}
+                  >
+                    €400 - €600
+                  </Button>
+                </div>
+                <div className="mb-3">
+                  <Button
+                    className="web-color"
+                    value={800}
+                    onClick={(e) => {
+                      checkAndSetPrices(e.target.value);
+                    }}
+                  >
+                    €600 - €800
+                  </Button>
+                </div>
+                <div className="mb-3">
+                  <Button
+                    className="web-color"
+                    value={1000}
+                    onClick={(e) => {
+                      checkAndSetPrices(e.target.value);
+                    }}
+                  >
+                    {" "}
+                    €800+
+                  </Button>
+                </div>
               </div>
-            </Card>
+            </div>
           </Col>
 
           <Col sm={9}>
-            <Row xs={1} md={2} className="g-4" style={{ columnGap: "30px" }}>
+            <Row xs={1} md={2} className="">
               {filterProduct.map((item, index) => {
                 return (
                   offset <= index &&
@@ -165,26 +198,24 @@ export default function Products() {
                 );
               })}
             </Row>
+            <div className="mt-4 d-flex">
+              <Button
+                className="m-2 web-color"
+                onClick={getPreviousProducts}
+                disabled={offset === 0}
+              >
+                Previous
+              </Button>
+              <Button
+                className="m-2 web-color"
+                onClick={getNextProducts}
+                disabled={offset >= filterProduct.length - 5}
+              >
+                Next
+              </Button>
+            </div>
           </Col>
         </Row>
-
-        <div className="buttons">
-          <Button
-            className="btn"
-            onClick={getPreviousProducts}
-            disabled={offset === 0}
-          >
-            Previous
-          </Button>
-
-          <Button
-            className="btn"
-            onClick={getNextProducts}
-            disabled={offset >= filterProduct.length - 5}
-          >
-            Next
-          </Button>
-        </div>
       </Container>
     </div>
   );

@@ -49,7 +49,7 @@ export default function Category() {
 
   return (
     <div>
-      <Hero />
+      <Hero url="https://www.embpowerexp.com/wp-content/uploads/2020/08/online-shopping-guide.jpg" />
 
       <Container>
         <div>
