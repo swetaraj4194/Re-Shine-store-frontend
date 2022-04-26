@@ -16,6 +16,7 @@ import Buy from "./pages/Buy";
 import SellerForm from "./pages/Form";
 import MyProduct from "./pages/MyProduct";
 import MyProfile from "./pages/Profile";
+import About from "./pages/About";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -45,6 +46,7 @@ function App() {
 
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
 
         <Route path="/NewItem" element={<SellerForm />} />
         <Route path="/myProducts" element={<MyProduct />} />

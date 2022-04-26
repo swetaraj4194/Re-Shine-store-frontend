@@ -17,7 +17,11 @@ import {
 import Loading from "../../components/Loading";
 import { fetchProductsById } from "../../store/products/actions";
 import { selectProductDetails } from "../../store/products/selectors";
-import { selectToken } from "../../store/user/selectors";
+import {
+  selectToken,
+  selectMyBid,
+  selectMyProduct,
+} from "../../store/user/selectors";
 import { postBidAmount } from "../../store/user/actions";
 import { postComments } from "../../store/user/actions";
 
@@ -27,6 +31,9 @@ export default function SpaceDetails() {
   const { id } = useParams();
   const details = useSelector(selectProductDetails);
   const token = useSelector(selectToken);
+  const bids = useSelector(selectMyBid);
+  const product = useSelector(selectMyProduct);
+  // console.log("product",product)
 
   const dispatch = useDispatch();
 
@@ -37,7 +44,6 @@ export default function SpaceDetails() {
     dispatch(fetchProductsById(id));
   }, [dispatch]);
 
-  
   //function  to post bid
   function postBid(event) {
     event.preventDefault();

@@ -22,7 +22,7 @@ export default function CategoryCard(props) {
           <ReactStars {...rating}></ReactStars>
         </Card.Text>
         <Link to={`/${props.id}`}>
-          <Button variant="primary">Read More</Button>
+          <Button variant="primary">Details</Button>
         </Link>
       </Card.Body>
     </Card>

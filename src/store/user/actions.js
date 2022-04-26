@@ -9,15 +9,14 @@ import {
   setMessage,
 } from "../appState/actions";
 
-import myAxios from "../../axios";
-
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const USER_UPDATED = "USER_UPDATED";
 export const LOG_OUT = "LOG_OUT";
 export const PRODUCT_POST_SUCCESS = "PRODUCT_POST_SUCCESS";
 export const PRODUCT_DELETE_SUCCESS = "PRODUCT_DELETE_SUCCESS";
-
+export const POST_BID_AMOUNT = "POST_BID_AMOUNT";
+export const POST_REVIEW = "POST_REVIEW";
 const loginSuccess = (userWithToken) => {
   return {
     type: LOGIN_SUCCESS,
@@ -252,6 +251,11 @@ export const updateUser = (name, email, phone, id) => {
 };
 
 //posting bid amount using (product post success action)
+export const productBidSuccess = (amount) => ({
+  type: POST_BID_AMOUNT,
+  payload: amount,
+});
+
 export const postBidAmount = (id, amount) => {
   return async (dispatch, getState) => {
     try {
@@ -278,7 +282,7 @@ export const postBidAmount = (id, amount) => {
         showMessageWithTimeout("success", false, response.data.message, 3000)
       );
 
-      dispatch(productPostSuccess(response.data.newBid));
+      dispatch(productBidSuccess(response.data.newBid));
 
       dispatch(appDoneLoading());
     } catch (error) {
@@ -295,7 +299,10 @@ export const postBidAmount = (id, amount) => {
 };
 
 //action for posting comments
-
+export const productReview = (comments) => ({
+  type: POST_REVIEW,
+  payload: comments,
+});
 export const postComments = (id, review) => {
   return async (dispatch, getState) => {
     try {
@@ -322,7 +329,7 @@ export const postComments = (id, review) => {
         showMessageWithTimeout("success", false, response.data.message, 3000)
       );
 
-      dispatch(productPostSuccess(response.data.newComment));
+      dispatch(productReview(response.data.newComment));
 
       dispatch(appDoneLoading());
     } catch (error) {
