@@ -52,12 +52,11 @@ export default function Category() {
       <Hero url="https://www.embpowerexp.com/wp-content/uploads/2020/08/online-shopping-guide.jpg" />
 
       <Container>
-        <div>
-          <span className="search">Search:</span>
+        <div className=" w-100 m-5" style={{ textAlign: "center" }}>
           <input
             type="search"
-            placeholder=""
-            className="me-1"
+            placeholder="Search"
+            className="icon"
             aria-label="Search"
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
@@ -68,20 +67,18 @@ export default function Category() {
 
         <Row>
           <Col sm={3}>
-            <label for="customRange3" class="form-label">
-              Price range
-            </label>
+            <Card.Title className="text-muted mb-3">Filter By Price</Card.Title>
             <div className="slider-parent">
               <input
                 type="range"
-                min="1"
-                max="1500"
+                min="0"
+                max="1000"
                 value={price}
                 onChange={({ target: { value: radius } }) => {
                   setPrices(radius);
                 }}
               />
-              <div className="buble">${price}</div>
+              <div className="buble">€{price}</div>
             </div>
           </Col>
 
@@ -102,10 +99,27 @@ export default function Category() {
                 );
               })}
             </Row>
+
+            <div className="mt-4 d-flex">
+              <Button
+                className="m-2 web-color"
+                onClick={getPreviousProducts}
+                disabled={offset === 0}
+              >
+                Previous
+              </Button>
+              <Button
+                className="m-2 web-color"
+                onClick={getNextProducts}
+                disabled={offset >= filteredProduct.length - 5}
+              >
+                Next
+              </Button>
+            </div>
           </Col>
         </Row>
 
-        <div className="buttons">
+        {/* <div className="buttons">
           <Button
             className="btn"
             onClick={getPreviousProducts}
@@ -121,7 +135,7 @@ export default function Category() {
           >
             Next
           </Button>
-        </div>
+        </div> */}
       </Container>
     </div>
   );

@@ -7,10 +7,29 @@
 .navbar {
   background-color: purple;
 }
+.web-color1 {
+  /* background-color: purple !important;
+  border: purple !important; */
+  /* color: white; */
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
+  border: white !important;
+  box-shadow: none !important;
+  
+}
+
 .web-color {
-  background-color: purple !important;
+   background-color: purple !important;
   border: purple !important;
   /* color: white; */
+  /* background-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
+  border: white !important;
+  box-shadow: none !important; */
+  
+}
+button:hover {
+  color: purple !important;
 }
 .item {
   display: flex;
@@ -31,6 +50,8 @@
   width: 60%;
   margin: auto;
   justify-content: center;
+  
   border-radius: 6px !important;
   border-color: rgb(134, 6, 134) !important;
 }
+

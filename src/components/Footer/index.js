@@ -9,10 +9,16 @@ export default function Footer() {
         <div class="container p-4">
           <div class="row">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-              {/* <h5 class="text-uppercase">ReShine Store</h5> */}
               <NavLink to="/" className="footer-logo">
                 Re<span className="footer-right-logo">-Shine Store</span>
               </NavLink>
+
+              <p>
+                We build leading destinations for buying, selling, and
+                exchanging products and services.The collection consists of
+                unique hand-selected vintage bohemian clothing, bags and
+                accessories with their own story and good vibes.
+              </p>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
@@ -48,7 +54,7 @@ export default function Footer() {
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase mb-0">Links</h5>
+              <h5 class="text-uppercase mb-0">My Accounts</h5>
 
               <ul class="list-unstyled">
                 <li>Link 1</li>

@@ -16,8 +16,10 @@ export default function CategoryCard(props) {
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={props.mainImage} />
       <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
-        <Card.Text>${props.price}</Card.Text>
+        <Card.Title className="text-lowercase">
+          {props.title}
+        </Card.Title>
+        <Card.Text>€{props.price}</Card.Text>
         <Card.Text>
           <ReactStars {...rating}></ReactStars>
         </Card.Text>

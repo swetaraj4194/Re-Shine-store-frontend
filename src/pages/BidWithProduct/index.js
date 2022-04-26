@@ -79,34 +79,64 @@ export default function MyProduct() {
   }
 
   return (
-    <Container style={{ width: "18rem" }}>
-      <Card.Title>My Bids</Card.Title>
-
-      <Card.Title>{user.name}</Card.Title>
-      <Card>
-        <Card className="p-5">
-          <Card.Text>
-            {bids.map((bid) => {
-              return (
-                <card key={bid.id}>
-                  BidAmount: <Card.Title>{bid.amount}</Card.Title>
-                  <Card.Title>{bid.product.title}</Card.Title>
-                  <img
-                    className="w-100"
-                    src={bid.product.mainImage}
-                    alt={bid.product.id}
-                  />
-                  <Card.Text>{bid.product.price}</Card.Text>
-                  <hr />
-                </card>
-              );
-            })}
-          </Card.Text>
-        </Card>
-      </Card>
-      <Link to={`/myProducts`}>
-        <Button variant="primary">myItem</Button>
-      </Link>
+    <Container className="p-5">
+      {bids?.map((bid) => {
+        return (
+          <div
+            class="mb-3 p-2"
+            style={{ maxwidth: "200px" }}
+          >
+            <div class="p-5 row g-0">
+              <div class="col-md-4">
+                <img
+                  src={bid.product.mainImage}
+                  class="img-fluid rounded-start"
+                  alt={bid.product.id}
+                />  
+              </div>
+              <div class="col-md-4">
+                <div class="card-body">
+                  <h5 class="card-title">Bid Amount: €{bid.amount}</h5>
+                  <p class="card-text">{bid.product.title}</p>
+                  <p class="card-text">€{bid.product.price}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </Container>
   );
 }
+
+// <Container style={{ width: "18rem" }}>
+//   <Card.Title>My Bids</Card.Title>
+
+//   <Card.Title>{user.name}</Card.Title>
+
+//     <Card className="p-5">
+//       <Card.Text>
+//         {bids.map((bid) => {
+//           return (
+//             <card key={bid.id}>
+//               BidAmount: <Card.Title>€{bid.amount}</Card.Title>
+//               <Card.Title className="h6 p-2 m-0 text-lowercase">
+//                 {bid.product.title}
+//               </Card.Title>
+//               <img
+//                 className="w-100"
+//                 src={bid.product.mainImage}
+//                 alt={bid.product.id}
+//               />
+//               <Card.Text>€{bid.product.price}</Card.Text>
+//               <hr />
+//             </card>
+//           );
+//         })}
+//       </Card.Text>
+//     </Card>
+
+//   <Link to={`/myProducts`}>
+//     <Button variant="primary">myItem</Button>
+//   </Link>
+// </Container>

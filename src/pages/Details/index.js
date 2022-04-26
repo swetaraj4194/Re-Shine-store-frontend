@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-
 import {
   Container,
   Card,
   Row,
   Col,
   Button,
-  Nav,
   Carousel,
   Table,
   Form,
@@ -37,7 +35,7 @@ export default function SpaceDetails() {
 
   const dispatch = useDispatch();
 
-  const [heighestBid, setHeighestBid] = useState(0);
+  const [heighestBid, setHeighestBid] = useState();
   const [comments, setComments] = useState("");
 
   useEffect(() => {
@@ -66,9 +64,8 @@ export default function SpaceDetails() {
   if (!details || parseInt(details.id) !== parseInt(id)) return <Loading />;
 
   return (
-    <Container>
-      <h1>Details</h1>
-
+    <Container className="p-5">
+      {/* <h1 className="text-center">Details</h1> */}
       <Row>
         <Col sm={7} style={{ width: "38rem" }} className="m-2">
           <Carousel>
@@ -87,7 +84,7 @@ export default function SpaceDetails() {
           </Carousel>
         </Col>
 
-        <Col sm={3}>
+        <Col sm={4}>
           <Row xs={1} md={2} className="g-4" style={{ columnGap: "30px" }}>
             <Card.Body>
               <Card.Title>{details.title}</Card.Title>
@@ -97,94 +94,110 @@ export default function SpaceDetails() {
             </Card.Body>
 
             <Link to={`/buy/${details.id}`}>
-              <Button variant="primary">Seller Detail</Button>
+              <Button variant="primary">Contact seller</Button>
             </Link>
           </Row>
         </Col>
+      </Row>
 
-        <Col sm={2}>
-          <Table className="striped bordered hover" size="sm">
-            <Card.Title>BID</Card.Title>
-            <tr>
-              <th>Email</th>
-              <th>Bid Amout</th>
-            </tr>
+      <div className="mt-5">
+        <h3>Bids for this product</h3>
+        {details.bids.length ? (
+          <table className="table table-striped" style={{ width: "30%" }}>
+            <thead class="thead-dark">
+              <tr>
+                <th>Email</th>
+                <th>Bid Amout</th>
+              </tr>
+            </thead>
             {details.bids.map((bid) => {
               return (
                 <tr>
-                  <td>{bid.email}</td>
-                  <td>{bid.amount}</td>
+                  <td className="p-2">{bid.email}</td>
+                  <td className="p-2">{bid.amount}</td>
                 </tr>
               );
             })}
+          </table>
+        ) : (
+         <h3 className="text-muted">No Bids yet!!!</h3>
+        )}
 
-            <Card>
-              {token ? (
-                <Form type="submit" onSubmit={postBid}>
-                  <Form.Group controlId="formBasicText">
-                    <Form.Label> </Form.Label>
-
-                    <Form.Control
-                      value={heighestBid}
-                      onChange={(event) => setHeighestBid(event.target.value)}
-                      type="Number"
-                      placeholder="Enter Amount"
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mt-5">
-                    <Button variant="primary" type="submit">
-                      Post Bid
-                    </Button>
-                  </Form.Group>
-                </Form>
-              ) : (
-                <Link to="/login">
-                  <Button>Login to add Bid</Button>
-                </Link>
-              )}
-            </Card>
-          </Table>
-        </Col>
-      </Row>
-
-      <Card>
-        {details.reviews.map((comment) => {
-          return (
-            <Card>
-              <Card.Title>Comments</Card.Title>
-              <Card.Text>Name: {comment.name}</Card.Text>
-              <Card.Text>comments: {comment.review}</Card.Text>
-            </Card>
-          );
-        })}
-      </Card>
-
-      <Card>
         {token ? (
-          <Form type="submit" onSubmit={addComment}>
-            <Form.Group controlId="formBasicText">
-              <Form.Label> </Form.Label>
-
+          <div>
+            <Form className="mb-5 d-flex" type="submit" onSubmit={postBid}>
               <Form.Control
-                value={comments}
-                onChange={(event) => setComments(event.target.value)}
-                type="Text"
-                placeholder="write comment"
+                style={{ width: "30%", marginRight: "10px" }}
+                value={heighestBid}
+                onChange={(event) => setHeighestBid(event.target.value)}
+                type="Number"
+                placeholder="Enter Amount"
+                required
               />
-            </Form.Group>
-            <Form.Group className="mt-5">
-              <Button variant="primary" type="submit">
-                Post comment
+              <Button className=" mr-2" variant="primary" type="submit">
+                Post Bid
               </Button>
-            </Form.Group>
+            </Form>
+          </div>
+        ) : (
+          <Link to="/login">
+            <Button className="mb-4">Login to add Bid</Button>
+          </Link>
+        )}
+      </div>
+
+      <div class="container">
+        <div class="row">
+          {details.reviews.map((comment) => {
+            return (
+              <div
+                class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
+                style={{
+                  backgroundColor: "#a6bfeb",
+                  borderRadius: "10px",
+                  color: "black",
+                  marginRight: "10px",
+                  padding: "10px",
+                }}
+              >
+                <div class="box-part text-center p-2">
+                  <div class="title" className=" text-center">
+                    <h4>{comment.name}</h4>
+                  </div>
+
+                  <div class="text">
+                    <span>{comment.review}</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="mt-5">
+        {token ? (
+          <Form className="mb-5 d-flex" type="submit" onSubmit={addComment}>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              style={{ width: "30%", marginRight: "10px" }}
+              value={comments}
+              onChange={(event) => setComments(event.target.value)}
+              type="Text"
+              placeholder="write comment"
+            />
+
+            <Button variant="primary" type="submit">
+              Post comment
+            </Button>
           </Form>
         ) : (
           <Link to="/login">
             <Button>Login to post comments</Button>
           </Link>
         )}
-      </Card>
+      </div>
     </Container>
   );
 }

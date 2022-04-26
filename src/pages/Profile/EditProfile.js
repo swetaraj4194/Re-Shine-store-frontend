@@ -16,18 +16,12 @@ export default function EditProfile() {
   const id = user.id;
 
   function submitForm(e) {
-   
     dispatch(updateUser(name, email, phone, id));
   }
 
   return (
-    <Form
-      as={Col}
-      md={{ span: 6, offset: 3 }}
-      className="mt-5"
-      onSubmit={submitForm}
-    >
-      <h1 className="mt-5 mb-5">Edit your profile</h1>
+    <Form className="p-5 " onSubmit={submitForm}>
+      <h1 className=" mb-5">Edit your profile</h1>
       <Form.Group>
         <Form.Label>Name</Form.Label>
         <Form.Control

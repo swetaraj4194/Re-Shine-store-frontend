@@ -99,7 +99,7 @@ export default function Products() {
         </Carousel.Item>
       </Carousel>
 
-      <Container>
+      <Container className="p-4">
         <div className=" w-100 m-5" style={{ textAlign: "center" }}>
           <input
             type="search"
@@ -118,9 +118,9 @@ export default function Products() {
                 Filter By Price
               </Card.Title>
               <div>
-                <div className="mb-3">
+                <div className="mb-2">
                   <Button
-                    className="web-color"
+                    className="web-color1"
                     value={200}
                     onClick={(e) => {
                       checkAndSetPrices(e.target.value);
@@ -130,9 +130,9 @@ export default function Products() {
                   </Button>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-2">
                   <Button
-                    className="web-color"
+                    className="web-color1"
                     value={400}
                     onClick={(e) => {
                       checkAndSetPrices(e.target.value);
@@ -142,9 +142,9 @@ export default function Products() {
                   </Button>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-2">
                   <Button
-                    className="web-color"
+                    className="web-color1"
                     value={600}
                     onClick={(e) => {
                       checkAndSetPrices(e.target.value);
@@ -153,9 +153,9 @@ export default function Products() {
                     €400 - €600
                   </Button>
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                   <Button
-                    className="web-color"
+                    className="web-color1"
                     value={800}
                     onClick={(e) => {
                       checkAndSetPrices(e.target.value);
@@ -164,9 +164,9 @@ export default function Products() {
                     €600 - €800
                   </Button>
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                   <Button
-                    className="web-color"
+                    className="web-color1"
                     value={1000}
                     onClick={(e) => {
                       checkAndSetPrices(e.target.value);
@@ -181,7 +181,7 @@ export default function Products() {
           </Col>
 
           <Col sm={9}>
-            <Row xs={1} md={2} className="">
+            <Row xs={1} md={2} className="" style={{columnGap: "15px", rowGap: "15px"}}>
               {filterProduct.map((item, index) => {
                 return (
                   offset <= index &&

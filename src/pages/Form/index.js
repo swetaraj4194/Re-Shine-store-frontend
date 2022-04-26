@@ -98,7 +98,7 @@ export default function SellerForm() {
   };
 
   return (
-    <Container>
+    <Container className="p-4 ">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h1 className="mt-5 mb-5">Post Items</h1>
         <Form.Group controlId="formBasicName">
@@ -174,7 +174,7 @@ export default function SellerForm() {
         </Form.Group>
 
         <Form.Group controlId="formBasicText">
-          <Form.Label>Bid</Form.Label>
+          <Form.Label>Minimum Bid</Form.Label>
           <Form.Control
             value={amount}
             onChange={(event) => setAmount(parseInt(event.target.value))}
