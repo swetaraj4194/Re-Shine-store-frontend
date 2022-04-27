@@ -8,29 +8,22 @@ import {
   Col,
   Button,
   Carousel,
-  Table,
   Form,
 } from "react-bootstrap";
 
 import Loading from "../../components/Loading";
 import { fetchProductsById } from "../../store/products/actions";
 import { selectProductDetails } from "../../store/products/selectors";
-import {
-  selectToken,
-  selectMyBid,
-  selectMyProduct,
-} from "../../store/user/selectors";
-import { postBidAmount } from "../../store/user/actions";
-import { postComments } from "../../store/user/actions";
-
+import { selectToken } from "../../store/user/selectors";
+import { postComments } from "../../store/products/actions";
+import { postBidAmount } from "../../store/products/actions";
 import RatingCard from "./RatingCard";
 
 export default function SpaceDetails() {
   const { id } = useParams();
   const details = useSelector(selectProductDetails);
   const token = useSelector(selectToken);
-  const bids = useSelector(selectMyBid);
-  const product = useSelector(selectMyProduct);
+
   // console.log("product",product)
 
   const dispatch = useDispatch();
@@ -38,21 +31,18 @@ export default function SpaceDetails() {
   const [heighestBid, setHeighestBid] = useState();
   const [comments, setComments] = useState("");
 
-  useEffect(() => {
-    dispatch(fetchProductsById(id));
-  }, [dispatch]);
-
   //function  to post bid
   function postBid(event) {
     event.preventDefault();
-
     dispatch(postBidAmount(details.id, heighestBid));
-
     setHeighestBid("");
   }
 
-  // function to post comments
+  useEffect(() => {
+    dispatch(fetchProductsById(id));
+  }, [dispatch, id]);
 
+  // function to post comments
   function addComment(event) {
     event.preventDefault();
 
@@ -65,11 +55,10 @@ export default function SpaceDetails() {
 
   return (
     <Container className="p-5">
-      {/* <h1 className="text-center">Details</h1> */}
       <Row>
         <Col sm={7} style={{ width: "38rem" }} className="m-2">
           <Carousel>
-            {details.images.map((item) => (
+            {details?.images.map((item) => (
               <Carousel.Item key={item.id}>
                 <img className="w-100" src={item.image} alt={item.id} />
               </Carousel.Item>
@@ -102,7 +91,8 @@ export default function SpaceDetails() {
 
       <div className="mt-5">
         <h3>Bids for this product</h3>
-        {details.bids.length ? (
+
+        {details?.bids?.length ? (
           <table className="table table-striped" style={{ width: "30%" }}>
             <thead class="thead-dark">
               <tr>
@@ -110,7 +100,8 @@ export default function SpaceDetails() {
                 <th>Bid Amout</th>
               </tr>
             </thead>
-            {details.bids.map((bid) => {
+
+            {details.bids?.map((bid) => {
               return (
                 <tr>
                   <td className="p-2">{bid.email}</td>
@@ -120,7 +111,7 @@ export default function SpaceDetails() {
             })}
           </table>
         ) : (
-         <h3 className="text-muted">No Bids yet!!!</h3>
+          <h3 className="text-muted">No Bids yet!!!</h3>
         )}
 
         {token ? (
@@ -148,9 +139,10 @@ export default function SpaceDetails() {
 
       <div class="container">
         <div class="row">
-          {details.reviews.map((comment) => {
+          {details?.reviews?.map((comment) => {
             return (
               <div
+                key={comment?.id}
                 class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
                 style={{
                   backgroundColor: "#a6bfeb",
@@ -162,11 +154,11 @@ export default function SpaceDetails() {
               >
                 <div class="box-part text-center p-2">
                   <div class="title" className=" text-center">
-                    <h4>{comment.name}</h4>
+                    <h4>{comment?.name}</h4>
                   </div>
 
                   <div class="text">
-                    <span>{comment.review}</span>
+                    <span>{comment?.review}</span>
                   </div>
                 </div>
               </div>

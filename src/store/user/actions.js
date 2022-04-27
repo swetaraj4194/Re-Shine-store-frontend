@@ -15,8 +15,8 @@ export const USER_UPDATED = "USER_UPDATED";
 export const LOG_OUT = "LOG_OUT";
 export const PRODUCT_POST_SUCCESS = "PRODUCT_POST_SUCCESS";
 export const PRODUCT_DELETE_SUCCESS = "PRODUCT_DELETE_SUCCESS";
-export const POST_BID_AMOUNT = "POST_BID_AMOUNT";
-export const POST_REVIEW = "POST_REVIEW";
+
+
 const loginSuccess = (userWithToken) => {
   return {
     type: LOGIN_SUCCESS,
@@ -120,7 +120,6 @@ export const getUserWithStoredToken = () => {
 };
 
 //action for adding product
-
 export const productPostSuccess = (item) => ({
   type: PRODUCT_POST_SUCCESS,
   payload: item,
@@ -180,7 +179,6 @@ export const postProduct = (
 };
 
 ///product delete
-
 export const productDeleteSuccess = (id) => ({
   type: PRODUCT_DELETE_SUCCESS,
   payload: id,
@@ -250,97 +248,3 @@ export const updateUser = (name, email, phone, id) => {
   };
 };
 
-//posting bid amount using (product post success action)
-export const productBidSuccess = (amount) => ({
-  type: POST_BID_AMOUNT,
-  payload: amount,
-});
-
-export const postBidAmount = (id, amount) => {
-  return async (dispatch, getState) => {
-    try {
-      const { token } = selectUser(getState());
-
-      // console.log("token",token)
-
-      dispatch(appLoading());
-
-      const response = await axios.post(
-        `${apiUrl}/products/bids/${id}`,
-        {
-          amount,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      // console.log("Bid", response);
-      dispatch(
-        showMessageWithTimeout("success", false, response.data.message, 3000)
-      );
-
-      dispatch(productBidSuccess(response.data.newBid));
-
-      dispatch(appDoneLoading());
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.message);
-        dispatch(setMessage("danger", true, error.response.data.message));
-      } else {
-        console.log(error.message);
-        dispatch(setMessage("danger", true, error.message));
-      }
-      dispatch(appDoneLoading());
-    }
-  };
-};
-
-//action for posting comments
-export const productReview = (comments) => ({
-  type: POST_REVIEW,
-  payload: comments,
-});
-export const postComments = (id, review) => {
-  return async (dispatch, getState) => {
-    try {
-      const { token } = selectUser(getState());
-
-      // console.log("token",token)
-
-      dispatch(appLoading());
-
-      const response = await axios.post(
-        `${apiUrl}/products/comment/${id}`,
-        {
-          review,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      // console.log("Bid", response);
-      dispatch(
-        showMessageWithTimeout("success", false, response.data.message, 3000)
-      );
-
-      dispatch(productReview(response.data.newComment));
-
-      dispatch(appDoneLoading());
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.message);
-        dispatch(setMessage("danger", true, error.response.data.message));
-      } else {
-        console.log(error.message);
-        dispatch(setMessage("danger", true, error.message));
-      }
-      dispatch(appDoneLoading());
-    }
-  };
-};

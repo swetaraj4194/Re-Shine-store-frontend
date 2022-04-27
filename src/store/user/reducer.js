@@ -5,8 +5,6 @@ import {
   PRODUCT_POST_SUCCESS,
   PRODUCT_DELETE_SUCCESS,
   USER_UPDATED,
-  POST_BID_AMOUNT,
-  POST_REVIEW,
 } from "./actions";
 
 const initialState = {
@@ -50,17 +48,6 @@ const reducer = (state = initialState, action) => {
     case USER_UPDATED:
       return { ...state, ...action.payload };
 
-    case POST_BID_AMOUNT:
-      return {
-        ...state,
-        bid: [...state.bid, action.payload],
-      };
-
-    case POST_REVIEW:
-      return {
-        ...state,
-        review: [...state.review, action.payload],
-      };
     default:
       return state;
   }
