@@ -12,7 +12,7 @@ import Login from "./pages/Login";
 import Products from "./pages/Products";
 import Category from "./pages/Category";
 import Details from "./pages/Details";
-import Buy from "./pages/Buy";
+import SellerDetail from "./pages/SellerDetail";
 import SellerForm from "./pages/Form";
 import MyProduct from "./pages/MyProduct";
 import MyProfile from "./pages/Profile";
@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/" element={<Products />} />
         <Route path="category/:id" element={<Category />} />
         <Route path="/:id" element={<Details />} />
-        <Route path="buy/:id" element={<Buy />} />
+        <Route path="buy/:id" element={<SellerDetail />} />
 
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />

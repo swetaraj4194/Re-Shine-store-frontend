@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import "./style.css";
 import { useParams } from "react-router-dom";
-
+import { BsArrowLeftSquareFill, BsArrowRightSquareFill } from "react-icons/bs";
 import Loading from "../../components/Loading";
 import { fetchCategory } from "../../store/products/actions";
 import { selectCategories } from "../../store/products/selectors";
@@ -106,36 +106,18 @@ export default function Category() {
                 onClick={getPreviousProducts}
                 disabled={offset === 0}
               >
-                Previous
+                <BsArrowLeftSquareFill />
               </Button>
               <Button
                 className="m-2 web-color"
                 onClick={getNextProducts}
                 disabled={offset >= filteredProduct.length - 5}
               >
-                Next
+                <BsArrowRightSquareFill />
               </Button>
             </div>
           </Col>
         </Row>
-
-        {/* <div className="buttons">
-          <Button
-            className="btn"
-            onClick={getPreviousProducts}
-            disabled={offset === 0}
-          >
-            Previous
-          </Button>
-
-          <Button
-            className="btn"
-            onClick={getNextProducts}
-            disabled={offset >= filteredProduct.length - 5}
-          >
-            Next
-          </Button>
-        </div> */}
       </Container>
     </div>
   );

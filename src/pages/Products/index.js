@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BsSearch } from "react-icons/bs";
+import { BsArrowLeftSquareFill, BsArrowRightSquareFill } from "react-icons/bs";
 
 import "./style.css";
 
@@ -181,7 +181,12 @@ export default function Products() {
           </Col>
 
           <Col sm={9}>
-            <Row xs={1} md={2} className="" style={{columnGap: "15px", rowGap: "15px"}}>
+            <Row
+              xs={1}
+              md={2}
+              className=""
+              style={{ columnGap: "15px", rowGap: "15px" }}
+            >
               {filterProduct.map((item, index) => {
                 return (
                   offset <= index &&
@@ -204,14 +209,14 @@ export default function Products() {
                 onClick={getPreviousProducts}
                 disabled={offset === 0}
               >
-                Previous
+                <BsArrowLeftSquareFill />
               </Button>
               <Button
                 className="m-2 web-color"
                 onClick={getNextProducts}
                 disabled={offset >= filterProduct.length - 5}
               >
-                Next
+                <BsArrowRightSquareFill />
               </Button>
             </div>
           </Col>
