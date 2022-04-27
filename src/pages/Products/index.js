@@ -7,16 +7,7 @@ import "./style.css";
 import { fetchProducts } from "../../store/products/actions";
 import { selectProducts } from "../../store/products/selectors";
 
-import {
-  Container,
-  Card,
-  Row,
-  Col,
-  Button,
-  Form,
-  FormControl,
-  Carousel,
-} from "react-bootstrap";
+import { Container, Card, Row, Col, Button, Carousel } from "react-bootstrap";
 
 import ProductCard from "./ProductCard";
 import { Link } from "react-router-dom";

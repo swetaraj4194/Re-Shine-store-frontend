@@ -1,6 +1,7 @@
 import { Container, Nav } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import "./styles.css";
+import { FiInstagram, FiFacebook, FiTwitter, FiYoutube } from "react-icons/fi";
 
 export default function Footer() {
   return (
@@ -54,13 +55,34 @@ export default function Footer() {
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase mb-0">My Accounts</h5>
+              <h5 class="text-uppercase mb-0">Social Media</h5>
 
-              <ul class="list-unstyled">
-                <li>Link 1</li>
-                <li>Link 2</li>
-                <li>Link 3</li>
-                <li>Link 4</li>
+              <ul class="list-unstyled" >
+                <li>
+                  {" "}
+                  <a href="#!">
+                    <FiFacebook />
+                  </a>
+                </li>
+                <li>
+                  {" "}
+                  <a href="#!">
+                    {" "}
+                    <FiInstagram />
+                  </a>
+                </li>
+                <li>
+                  {" "}
+                  <a href="#!">
+                    <FiTwitter />
+                  </a>
+                </li>
+                <li>
+                  {" "}
+                  <a href="#!">
+                    <FiYoutube />
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

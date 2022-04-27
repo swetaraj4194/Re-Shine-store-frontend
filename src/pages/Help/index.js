@@ -25,7 +25,7 @@ export default function Help() {
               </div>
 
               <div class="card-title">
-                <strong> swetaraj4194@gmail</strong>
+                <strong> swetaraj4194@gmail.com</strong>
               </div>
             </div>
 
