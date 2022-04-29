@@ -2,24 +2,30 @@ import {
   LOG_OUT,
   LOGIN_SUCCESS,
   TOKEN_STILL_VALID,
-  STORY_POST_SUCCESS,
-  STORY_DELETE_SUCCESS,
-  SPACE_UPDATED,
+  PRODUCT_POST_SUCCESS,
+  PRODUCT_DELETE_SUCCESS,
+  BID_DELETE_SUCCESS,
+  USER_UPDATED,
 } from "./actions";
 
 const initialState = {
   token: localStorage.getItem("token"),
+  id: null,
   name: null,
   email: null,
-  space: null,
+  phone: null,
+  product: [],
+  bid: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    //Login
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload };
 
+    //Logout
     case LOG_OUT:
       localStorage.removeItem("token");
       return { ...initialState, token: null };
@@ -27,33 +33,34 @@ const reducer = (state = initialState, action) => {
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
 
-    // case STORY_POST_SUCCESS:
-    //   return {
-    //     ...state,
-    //     space: {
-    //       ...state.space,
-    //       stories: [...state.space.stories, action.payload],
-    //     },
-    //   };
+    //Post Bid
+    case PRODUCT_POST_SUCCESS:
+      return {
+        ...state,
+        product: [...state.product, { ...action.payload }],
+      };
 
-    // case SPACE_UPDATED:
-    //   return {
-    //     ...state,
-    //     space: { ...action.payload, stories: state.space.stories },
-    //   };
+    //Delete my products
+    case PRODUCT_DELETE_SUCCESS:
+      const id = action.payload;
+      const newProducts = state.product.filter((product) => product.id !== id);
+      return {
+        ...state,
+        product: newProducts,
+      };
 
-    // case STORY_DELETE_SUCCESS:
-    //   const storyId = action.payload;
-    //   const newStories = state.space.stories.filter(
-    //     (story) => story.id !== storyId
-    //   );
-    //   return {
-    //     ...state,
-    //     space: {
-    //       ...state.space,
-    //       stories: newStories,
-    //     },
-    //   };
+    //Delete bid
+    case BID_DELETE_SUCCESS:
+      const bidId = action.payload;
+      const newBids = state.bid.filter((bid) => bid.id !== bidId);
+      return {
+        ...state,
+        bid: newBids,
+      };
+
+    //update user profile
+    case USER_UPDATED:
+      return { ...state, ...action.payload };
 
     default:
       return state;

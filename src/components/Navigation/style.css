@@ -1,7 +1,19 @@
 .title {
   font-size: 30px;
-  color: #d13f0a!important;
+  color: white !important;
+
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+.logo {
+  text-decoration: none;
+  color: white;
+}
+.sale {
+  text-decoration: none;
+  color: white !important;
+}
+.nav-link{
+  color: white !important;
 }

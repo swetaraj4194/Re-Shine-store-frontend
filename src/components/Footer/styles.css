@@ -1,0 +1,25 @@
+.footer-logo {
+  margin-right: 334px;
+  color: white;
+  margin-right: 65px;
+  font-family: "Crimson Text";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 47px;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 0 0 20px 0;
+  height: 5px;
+  color: white !important;
+}
+.logo {
+  color: white !important;
+}

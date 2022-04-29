@@ -1,3 +1,5 @@
 export const selectProducts = (state) => state.products.allProducts;
 
-// export const selectSpaceDetails = (state) => state.spaces.spaceDetails;
+export const selectCategories = (state) => state.products.categoryDetails;
+export const selectProductDetails = (state) => state.products.productDetails;
+export const sellerDetails = (state) => state.products.sellerDetails;
