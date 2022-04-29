@@ -77,8 +77,9 @@ export default function SpaceDetails() {
           <Row xs={1} md={2} className="g-4" style={{ columnGap: "30px" }}>
             <Card.Body>
               <Card.Title>{details.title}</Card.Title>
-              <Card.Title>{details.description}</Card.Title>
-              <Card.Text>${details.price}</Card.Text>
+              <Card.Text>{details.description}</Card.Text>
+              <Card.Text>Condition: {details.status}</Card.Text>
+              <Card.Text>€{details.price}</Card.Text>
               <RatingCard rating={details.ratings}></RatingCard>
             </Card.Body>
 
@@ -92,27 +93,26 @@ export default function SpaceDetails() {
       <div className="mt-5">
         <h3>Bids for this product</h3>
 
-        {details?.bids?.length ? (
-          <table className="table table-striped" style={{ width: "30%" }}>
-            <thead class="thead-dark">
+        <table className="table table-striped" style={{ width: "30%" }}>
+          <thead class="thead-dark">
+            <tr>
+              <th>Email</th>
+              <th>Bid Amount (€)</th>
+            </tr>
+          </thead>
+          <tr>
+            <td className="p-2">Minimum Bid</td>
+            <td className="p-2">{details.minimumBid}</td>
+          </tr>
+          {details.bids?.map((bid) => {
+            return (
               <tr>
-                <th>Email</th>
-                <th>Bid Amout</th>
+                <td className="p-2">{bid.email}</td>
+                <td className="p-2">{bid.amount}</td>
               </tr>
-            </thead>
-
-            {details.bids?.map((bid) => {
-              return (
-                <tr>
-                  <td className="p-2">{bid.email}</td>
-                  <td className="p-2">{bid.amount}</td>
-                </tr>
-              );
-            })}
-          </table>
-        ) : (
-          <h3 className="text-muted">No Bids yet!!!</h3>
-        )}
+            );
+          })}
+        </table>
 
         {token ? (
           <div>

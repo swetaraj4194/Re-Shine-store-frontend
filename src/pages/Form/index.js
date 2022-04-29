@@ -23,9 +23,10 @@ export default function SellerForm() {
 
   const [images, setImage] = useState([]);
 
-  const [amount, setAmount] = useState(0);
+  const [minimumBid, setMinimumBid] = useState(0);
   const [description, setDescription] = useState("Description");
   const [price, setPrice] = useState(10);
+  const [status, setStatus] = useState("Good");
 
   const token = useSelector(selectToken);
   const dispatch = useDispatch();
@@ -43,8 +44,10 @@ export default function SellerForm() {
         description,
         price,
         mainImage,
+        status,
         categoryId,
-        amount,
+        minimumBid,
+
         // Object.values(images)
         images
       )
@@ -146,13 +149,27 @@ export default function SellerForm() {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label className="mt-4">Image</Form.Label>
+            <Form.Label className="mt-4">Other Images</Form.Label>
             <Form.Control
               onChange={uploadImage}
               type="file"
               placeholder="url"
               multiple
             />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicText">
+            <label className="mt-4">
+              Select Product Condition:
+              <select
+                value={status}
+                onChange={(event) => setStatus(event.target.value)}
+              >
+                <option value="New">New</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+              </select>
+            </label>
           </Form.Group>
 
           <Form.Group controlId="formBasicText">
@@ -177,8 +194,8 @@ export default function SellerForm() {
           <Form.Group controlId="formBasicText">
             <Form.Label className="mt-4">Minimum Bid</Form.Label>
             <Form.Control
-              value={amount}
-              onChange={(event) => setAmount(parseInt(event.target.value))}
+              value={minimumBid}
+              onChange={(event) => setMinimumBid(parseInt(event.target.value))}
               type="Number"
               placeholder="Minimum bid"
               required

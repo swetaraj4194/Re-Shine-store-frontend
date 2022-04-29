@@ -14,18 +14,23 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    //fectch all products
     case FETCH_PRODUCTS_SUCCESS:
       return { ...state, allProducts: action.payload };
 
+    //fecting data by category
     case FETCH_CATEGORY_SUCCESS:
       return { ...state, categoryDetails: { ...action.payload } };
 
+    //fetch details
     case FETCH_DETAILS_SUCCESS:
       return { ...state, productDetails: { ...action.payload } };
 
+    //fetching seller detail
     case FETCH_SELLER_DETAILS:
       return { ...state, sellerDetails: { ...action.payload } };
 
+    //posting bid amount
     case POST_BID_AMOUNT:
       return {
         ...state,
@@ -35,6 +40,7 @@ export default function reducer(state = initialState, action) {
         },
       };
 
+    //posting review
     case POST_REVIEW:
       return {
         ...state,

@@ -1,13 +1,6 @@
 import React, { useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
-import {
-  Button,
-  Card,
-  CardGroup,
-  Carousel,
-  Container,
-  Row,
-} from "react-bootstrap";
+import { Button, Card, Carousel, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import Loading from "../../components/Loading";
@@ -30,13 +23,13 @@ export default function MyProduct() {
     if (!token) navigate("/login");
   }, [token]);
 
-  if (product === null) {
-    return <Loading />;
-  }
-
   const onDelete = (id) => {
     dispatch(deleteProduct(id));
   };
+
+  if (product === null) {
+    return <Loading />;
+  }
 
   return (
     <Container className="p-4">
@@ -47,8 +40,6 @@ export default function MyProduct() {
       <hr />
       <Card.Title>My Products</Card.Title>
 
-      {/* <Card.Title>NAME: {user.name}</Card.Title> */}
-      {/* <CardGroup style={{ display: "flex", flexDirection: "column" }}> */}
       <Row
         xs={1}
         md={2}
@@ -70,15 +61,15 @@ export default function MyProduct() {
                   style={{ width: "18rem" }}
                   key={product.id}
                 >
-                  <Carousel.Item>
-                    <img
-                      className="w-100"
-                      // class="mcard-img-top"
-                      src={items.mainImage}
-                      alt={"details.title"}
-                    />
-                  </Carousel.Item>
                   <Carousel>
+                    <Carousel.Item>
+                      <img
+                        className="w-100"
+                        // class="mcard-img-top"
+                        src={items.mainImage}
+                        alt={"details.title"}
+                      />
+                    </Carousel.Item>
                     {items.images.map((item) => (
                       <Carousel.Item key={item.id}>
                         <img className="w-100" src={item.image} alt={item.id} />
@@ -104,7 +95,6 @@ export default function MyProduct() {
                 </Card>
               );
             })}
-        {/* </CardGroup> */}
       </Row>
     </Container>
   );

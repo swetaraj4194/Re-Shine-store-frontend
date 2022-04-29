@@ -15,7 +15,7 @@ export const USER_UPDATED = "USER_UPDATED";
 export const LOG_OUT = "LOG_OUT";
 export const PRODUCT_POST_SUCCESS = "PRODUCT_POST_SUCCESS";
 export const PRODUCT_DELETE_SUCCESS = "PRODUCT_DELETE_SUCCESS";
-
+export const BID_DELETE_SUCCESS = "PRODUCT_DELETE_SUCCESS";
 
 const loginSuccess = (userWithToken) => {
   return {
@@ -130,8 +130,9 @@ export const postProduct = (
   description,
   price,
   mainImage,
+  status,
   categoryId,
-  amount,
+  minimumBid,
   images
 ) => {
   return async (dispatch, getState) => {
@@ -146,8 +147,9 @@ export const postProduct = (
         {
           title,
           categoryId,
-          amount,
+          minimumBid,
           mainImage,
+          status,
           images,
 
           description,
@@ -189,7 +191,7 @@ export const deleteProduct = (id) => {
     dispatch(appLoading());
     const { token } = selectUser(getState());
 
-    console.log(id);
+    //console.log(id);
 
     try {
       const response = await axios.delete(`${apiUrl}/products/${id}`, {
@@ -248,3 +250,32 @@ export const updateUser = (name, email, phone, id) => {
   };
 };
 
+///Bid delete
+export const bidDeleteSuccess = (id) => ({
+  type: BID_DELETE_SUCCESS,
+  payload: id,
+});
+
+export const deleteBid = (id) => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    const { token } = selectUser(getState());
+
+    //console.log(id);
+
+    try {
+      const response = await axios.delete(`${apiUrl}/products/bid/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      //console.log("Product deleted?", response);
+
+      dispatch(bidDeleteSuccess(id));
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.error(e);
+    }
+  };
+};

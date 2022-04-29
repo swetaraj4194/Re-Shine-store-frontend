@@ -170,8 +170,7 @@ export const postComments = (id, review) => {
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 3000)
       );
-
-      dispatch(productReview(response.data.newComment));
+      dispatch(productReview(response.data.newReview));
 
       dispatch(appDoneLoading());
     } catch (error) {
