@@ -22,17 +22,7 @@ export default function ProductCard(props) {
       }}
       to={`/${props.id}`}
     >
-      {/* <Card key={props.id}>
-        <Card.Img  src={props.mainImage} />
-        <Card.Body>
-          <Card.Title>{props.title}</Card.Title>
-          <Card.Text>€{props.price}</Card.Text>
-          <Card.Text>
-            <ReactStars {...rating}></ReactStars>
-          </Card.Text>{" "}
-         
-        </Card.Body>
-      </Card> */}
+     
 
       <div class="card" style={{ width: "18rem" }}>
         <img

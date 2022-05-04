@@ -6,8 +6,10 @@ import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 
+
 import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
+import HomePage from "./pages/HomePage"
 import Login from "./pages/Login";
 import Products from "./pages/Products";
 import Category from "./pages/Category";
@@ -23,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import BidWithProduct from "./pages/BidWithProduct";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -40,7 +43,8 @@ function App() {
 
       {isLoading ? <Loading /> : null}
       <Routes>
-        <Route exact path="/" element={<Products />} />
+        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/product" element={<Products />} />
         <Route path="category/:id" element={<Category />} />
         <Route path="/:id" element={<Details />} />
         <Route path="buy/:id" element={<SellerDetail />} />

@@ -8,15 +8,7 @@ import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 import { BsFillBrightnessAltHighFill } from "react-icons/bs";
 
-import {
-
-  Button,
-  Container,
-
-  Nav,
-  Navbar,
-  NavDropdown,
-} from "react-bootstrap";
+import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import NavbarItem from "./NavbarItem";
 
 export default function Navigation() {
@@ -50,10 +42,10 @@ export default function Navigation() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/product">Home</Nav.Link>
 
             <NavDropdown title="Products" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="/">All</NavDropdown.Item>
+              <NavDropdown.Item href="/product">All</NavDropdown.Item>
 
               <NavDropdown.Item href="/category/1">
                 Electronics
