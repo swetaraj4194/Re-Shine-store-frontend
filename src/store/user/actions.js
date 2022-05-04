@@ -15,7 +15,7 @@ export const USER_UPDATED = "USER_UPDATED";
 export const LOG_OUT = "LOG_OUT";
 export const PRODUCT_POST_SUCCESS = "PRODUCT_POST_SUCCESS";
 export const PRODUCT_DELETE_SUCCESS = "PRODUCT_DELETE_SUCCESS";
-export const BID_DELETE_SUCCESS = "PRODUCT_DELETE_SUCCESS";
+export const BID_DELETE_SUCCESS = "BID_DELETE_SUCCESS";
 
 const loginSuccess = (userWithToken) => {
   return {
@@ -87,6 +87,7 @@ export const login = (email, password) => {
 // action to get user with stored token:
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
+    console.log("in bootstraping");
     // get token from the state
     const token = selectToken(getState());
 
@@ -251,10 +252,13 @@ export const updateUser = (name, email, phone, id) => {
 };
 
 ///Bid delete
-export const bidDeleteSuccess = (id) => ({
-  type: BID_DELETE_SUCCESS,
-  payload: id,
-});
+export const bidDeleteSuccess = (id) => {
+  console.log("payload", id);
+  return {
+    type: BID_DELETE_SUCCESS,
+    payload: id,
+  };
+};
 
 export const deleteBid = (id) => {
   return async (dispatch, getState) => {

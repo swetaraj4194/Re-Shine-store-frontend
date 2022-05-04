@@ -53,6 +53,8 @@ const reducer = (state = initialState, action) => {
     case BID_DELETE_SUCCESS:
       const bidId = action.payload;
       const newBids = state.bid.filter((bid) => bid.id !== bidId);
+      // console.log("newBids", newBids);
+      // console.log("state", state);
       return {
         ...state,
         bid: newBids,

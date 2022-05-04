@@ -7,6 +7,7 @@ import {
   setMessage,
   showMessageWithTimeout,
 } from "../appState/actions";
+import { getUserWithStoredToken } from "../user/actions";
 
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_CATEGORY_SUCCESS = "FETCH_CATEGORY_SUCCESS";
@@ -126,7 +127,7 @@ export const postBidAmount = (id, amount) => {
       );
 
       dispatch(productBidSuccess(response.data.newBid));
-
+      dispatch(getUserWithStoredToken());
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
