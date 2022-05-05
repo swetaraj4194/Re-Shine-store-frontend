@@ -32,6 +32,12 @@ export default function Category() {
     setoffset(offset - 6);
   };
 
+   useEffect(() => {
+     if (!searchTerm == 0) {
+       setoffset(0);
+     }
+   }, [searchTerm]);
+
   if (!items || parseInt(items.id) !== parseInt(id)) return <Loading />;
 
   //search

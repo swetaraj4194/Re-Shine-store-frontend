@@ -10,10 +10,11 @@ import { selectProducts } from "../../store/products/selectors";
 import { Container, Card, Row, Col, Button, Carousel } from "react-bootstrap";
 
 import ProductCard from "./ProductCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Products() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const items = useSelector(selectProducts);
 
   useEffect(() => {
@@ -21,6 +22,17 @@ export default function Products() {
   }, [dispatch]);
 
   const [searchTerm, setSearchTerm] = useState("");
+
+  // useEffect(() => {
+  //   if (!searchTerm == 0) navigate("/");
+  // }, [searchTerm]);
+
+
+    useEffect(() => {
+      if (!searchTerm == 0){
+        setoffset(0)
+      };
+    }, [searchTerm]);
 
   //filter
   const [filteredPrice, setFilteredPrice] = useState([...items]);

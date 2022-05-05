@@ -79,6 +79,8 @@ export default function Navigation() {
             <Button className="btn btn-light">SELL</Button>
           </Nav.Link>
 
+        
+
           {token && <NavbarItem path="/myProducts" linkText="My Items" />}
           {loginLogoutControls}
         </Navbar.Collapse>
