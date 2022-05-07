@@ -38,8 +38,6 @@ React Bootstrap
 
 ### Database Model <a href='https://dbdiagram.io/d/625be8832514c9790342be8f'>Click me!</a>
 
-### Demo
-
 #### Home Page
 
 <img src='https://res.cloudinary.com/daokf4bsg/image/upload/v1651963718/Artists/main_fz8icy.png' alt='homePoge'>
