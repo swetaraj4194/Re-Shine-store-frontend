@@ -30,38 +30,18 @@ It is an open platform where people can bid on items and seller can decide on wh
 <img width='75px' src='https://cdn-images-1.medium.com/max/1200/0*Ycp0d6CqDMIGWBrY.png' />
 
 #### UI Frameworks
-
-Material UI
-
-<img width='70px' src='https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png' />
-
 React Bootstrap
 
 <img width='70px' src='https://www.educative.io/v2api/editorpage/5816757605367808/image/6486746733740032' />
 
-### Wireframe <a href='https://wireframepro.mockflow.com/editor.jsp?editor=on&spaceid=MgxsCJjWTmb&bgcolor=white&perm=Create&pcompany=C713224b83f6f4595a5fcdb9548d22712&ptitle=Code%20Snippet%20Manager&category=web&projectid=MyKWjrkWTmb&publicid=e3cb30dd9c444588b26a72d4067fe6c6#/page/4cd2e8a855314014bda27709d8a63d4c'>Click me!</a>
+### Wireframe <a href='https://wireframepro.mockflow.com/editor.jsp?editor=off&perm=Owner&projectid=MmM2MN6z9nb&publicid=a458c8cfffe44c27a83f04401018596b#/page/D7bfbb1ef476c4b717bf74509cff75028'>Click me!</a>
 
 ### Database Model <a href='https://dbdiagram.io/d/625be8832514c9790342be8f'>Click me!</a>
 
 ### Demo
 
-#### Home Feed
+#### Home Page
 
-<img src='https://media.giphy.com/media/YMIAJPRc9shVNol0UI/giphy.gif' alt='homeFeed'>
+<img src='https://res.cloudinary.com/daokf4bsg/image/upload/v1651963718/Artists/main_fz8icy.png' alt='homePoge'>
 
-#### Snippet Manager
 
-<img src='https://media.giphy.com/media/9HtL8xxS5kZMzJeWRc/giphy.gif' alt='snippetManager'>
-
-#### Add a snippet
-
-<img src='https://media.giphy.com/media/Tj3v5117QTy0QV4xmf/giphy.gif' alt='addSnippet'>
-
-#### Issue snippet
-
-<img src='https://media.giphy.com/media/HGqkzP5SNXG1as7lkD/giphy.gif' alt='livechat'>
-<img src='https://media.giphy.com/media/caLLuzXhlf0Fy0Ah4C/giphy.gif' alt='livechat2'>
-
-#### Challenges
-
-<img src='https://media.giphy.com/media/ppb1Hj3r46x2vQjTlD/giphy.gif' alt='challenge' />
